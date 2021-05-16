@@ -1,0 +1,105 @@
+created: 20200809020451042
+modified: 20210516143349377
+tags: FrontDesk
+title: FrontDesk/OrderBook
+type: text/vnd.tiddlywiki
+
+\define draft()
+<$reveal type="nomatch" state="$:/state/view/draftFRONTDESK" text="show">
+
+<$button style="background-color: transparent; border: none;" set="$:/state/view/draftFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##0}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/draftFRONTDESK" text="show">
+
+<$button style="background-color: transparent; border: none;" set="$:/state/view/draftFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##0}}</$button>
+
+<$list filter="[tag[Order]stage[0]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+\define pending()
+<$reveal type="nomatch" state="$:/state/view/pendingFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/pendingFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##1}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/pendingFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/pendingFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##1}}</$button>
+
+<$list filter="[tag[Order]stage[1]!sort[modified]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+\define sent()
+<$reveal type="nomatch" state="$:/state/view/sentFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/sentFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##2}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/sentFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/sentFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##2}}</$button>
+
+<$list filter="[tag[Order]stage[2]!sort[modified]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+\define confirmed()
+<$reveal type="nomatch" state="$:/state/view/confirmedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/confirmedFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##3}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/confirmedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/confirmedFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##3}}</$button>
+
+<$list filter="[tag[Order]stage[3]!sort[modified]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+\define received()
+<$reveal type="nomatch" state="$:/state/view/receivedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/receivedFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##4}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/receivedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/receivedFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##4}}</$button>
+
+<$list filter="[tag[Order]stage[4]!sort[modified]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+\define installed()
+<$reveal type="nomatch" state="$:/state/view/installedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/installedFRONTDESK" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##5}}</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/view/installedFRONTDESK" text="show">
+
+<$button class="accordian" set="$:/state/view/installedFRONTDESK" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##5}}</$button>
+
+<$list filter="[tag[Order]stage[5]!sort[modified]limit[60]] -$:/FrontDesk/TempOrder20001" template="FrontDesk/SearchResults/Template" />
+</$reveal>
+\end
+
+
+
+<<draft>>
+
+<<pending>>
+
+<<sent>>
+
+<<confirmed>>
+
+<<received>>
+
+<<installed>>
+
+<div style="float: none; kill:both;"></div>

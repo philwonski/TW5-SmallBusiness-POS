@@ -1,0 +1,18 @@
+created: 20200809021221587
+modified: 20201202163611618
+revision: 0
+tags: 
+title: FrontDesk/SearchResultsToggler
+type: text/vnd.tiddlywiki
+
+\define noBook()
+<$list filter="[[FrontDesk/SearchTerm]get[term]minlength[3]]">{{FrontDesk/SearchResults}}</$list>
+\end
+
+\define Book()
+<$list filter="[[FrontDesk/SearchTerm]get[term]minlength[3]then[nobook]else[book]]" variable="bookyn"><div class=<<bookyn>> >{{FrontDesk/OrderBook_Holder}}</div></$list>
+\end
+
+
+<<noBook>>
+<<Book>>

@@ -1,0 +1,21 @@
+created: 20200809144726283
+modified: 20200809145029745
+revision: 0
+tags: FrontDesk
+title: FrontDesk/Order/Dg1a
+type: text/vnd.tiddlywiki
+
+<div style="font-size:130%">Paste <b>{{FrontDesk/StartOrder/storage!!pastevalue}}</b> into the </div>
+
+<div style="line-height: 30px">
+<$tiddler tiddler="FrontDesk/StartOrder/storage">
+<$radio field="pasteto" value="name"> Name</$radio><br>
+<$radio field="pasteto" value="address"> Address</$radio><br>
+<$radio field="pasteto" value="phone"> Phone number</$radio><br>
+<$radio field="pasteto" value="ordernumber"> Order Number</$radio><br>
+<$radio field="pasteto" value="nowhere"> Don't paste "{{FrontDesk/StartOrder/storage!!pastevalue}}" into the Order</$radio>
+</$tiddler>
+</div>
+<hr>
+
+{{FrontDesk/Button/StartOrder_LoadForm}}

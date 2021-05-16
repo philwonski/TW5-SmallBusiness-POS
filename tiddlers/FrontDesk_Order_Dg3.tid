@@ -1,0 +1,17 @@
+created: 20200809142620153
+modified: 20200816222144859
+revision: 0
+tags: BackOffice
+title: FrontDesk/Order/Dg3
+type: text/vnd.tiddlywiki
+
+\define button()
+<$button>
+<$button class="searchResults">
+<$action-sendmessage $message="tm-modal" $param="FrontDesk/Modal/OrderTabs" corder={{!!title}} />
+View/Print Order</$button>
+\end
+
+<h2>Success! Order stored in system.</h2>
+<br>
+<$list filter="[tag[Order]search:title[order_fd]!sort[created]limit[1]]"><<button>></$list>

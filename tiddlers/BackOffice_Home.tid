@@ -1,0 +1,15 @@
+created: 20200709165627517
+modified: 20201202163740763
+revision: 0
+tags: BackOffice View Home
+title: BackOffice/Home
+type: text/vnd.tiddlywiki
+
+<div style="text-align: right; margin-bottom: 60px;">
+{{BackOffice/Menu}}
+</div>
+
+<div>
+<div style="width: 100%; padding-right: 10%;">{{BackOffice/SearchBox}}</div>
+{{BackOffice/SearchResultsToggler}}
+</div>

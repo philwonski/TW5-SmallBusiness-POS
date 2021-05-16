@@ -1,0 +1,18 @@
+created: 20200807182546722
+modified: 20201202163736886
+revision: 0
+tags: 
+title: BackOffice/SearchResultsToggler
+type: text/vnd.tiddlywiki
+
+\define noBook()
+<$list filter="[[BackOffice/SearchTerm]get[term]minlength[3]]">{{BackOffice/SearchResults}}</$list>
+\end
+
+\define Book()
+<$list filter="[[BackOffice/SearchTerm]get[term]minlength[3]then[nobook]else[book]]" variable="bookyn"><div class=<<bookyn>> >{{BackOffice/OrderBook_Holder}}</div></$list>
+\end
+
+
+<<noBook>>
+<<Book>>

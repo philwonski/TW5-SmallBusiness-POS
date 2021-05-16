@@ -1,0 +1,21 @@
+created: 20200702013026987
+modified: 20200811012202106
+revision: 0
+tags: BackOffice
+title: BackOffice/Order/Dg1a
+type: text/vnd.tiddlywiki
+
+<div style="font-size:130%">Paste <b>{{BackOffice/StartOrder/storage!!pastevalue}}</b> into the </div>
+
+<div style="line-height: 30px">
+<$tiddler tiddler="BackOffice/StartOrder/storage">
+<$radio field="pasteto" value="name"> Name</$radio><br>
+<$radio field="pasteto" value="address"> Address</$radio><br>
+<$radio field="pasteto" value="phone"> Phone number</$radio><br>
+<$radio field="pasteto" value="ordernumber"> Order Number</$radio><br>
+<$radio field="pasteto" value="nowhere"> Don't paste "{{BackOffice/StartOrder/storage!!pastevalue}}" into the Order</$radio>
+</$tiddler>
+</div>
+<hr>
+
+{{BackOffice/Button/StartOrder_LoadForm}}

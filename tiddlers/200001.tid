@@ -1,0 +1,32 @@
+address: 
+color_item1: 
+created: 20200701234644468
+deposit: 
+deposit_checkno: 
+deposit_type: 
+desc_item1: 
+email: 
+extprice_item1: 
+fn: 
+function_item1: 
+ln: 
+modified: 20200704175541529
+num_item1: 
+orderdate: 
+ordernotes: 
+ordernumber: 
+paymentfinal: 
+paymentfinal_checkno: 
+paymentfinal_type: 
+phone1: 
+phone2: 
+qty_item1: 
+revision: 0
+subtotal: 
+tags: OrderTemplate Model
+tax: 
+title: 200001
+total: 
+type: text/vnd.tiddlywiki
+unitprice_item1: 
+vendor_item1: 

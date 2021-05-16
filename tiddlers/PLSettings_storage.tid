@@ -1,0 +1,85 @@
+created: 20200704160447821
+modified: 20210516153540156
+subtitle: App Settings
+tags: BackOffice PLsettings
+title: PLSettings/storage
+type: text/vnd.tiddlywiki
+
+\define createPerson()
+<$button><$action-createtiddler $basetitle={{BackOffice/tempPerson!!name}} $template="Phil" clerkname={{BackOffice/tempPerson!!name}} /><$action-setfield $tiddler="BackOffice/tempPerson" $field="name" $value=""/>Add Clerk</$button>
+\end
+
+\define integrity()
+
+<h3>Integrity Check</h3>
+<hr>
+
+//Integrity check simply lists all Order #s in the system. This is useful when using sequential order #s to make sure they're all in here.//
+
+ <br>
+<$button>
+<$action-sendmessage $message="tm-modal" $param="Integrity Check" />
+Integrity Check
+</$button>
+\end
+
+\define instructions()
+<$reveal type="nomatch" state="$:/state/instructions" text="show">
+
+<$button class="toggler" set="$:/state/instructions" setTo="show">{{$:/core/images/right-arrow}} Instructions</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/instructions" text="show">
+
+<$button class="toggler" set="$:/state/instructions" setTo="hide">{{$:/core/images/down-arrow}} Instructions</$button>
+
+{{Instructions}}
+
+</$reveal>
+\end
+
+<br>
+
+<<instructions>>
+
+<br><br>
+
+<<integrity>>
+<br>
+
+<h3>Tax Rate</h3>
+<hr>
+<$edit-text tiddler="Both/Settings/storage" field="taxrate"/>
+
+<br><br>
+<h3>App Users</h3>
+<hr>
+<$list filter="[tag[Clerk]!hide[yes]]">{{!!title}}  <$button style="background-color:transparent; border:none; font-size: 70%;"><$action-setfield $tiddler={{!!title}} $field="hide" $value="yes"/> {{$:/core/images/delete-button}}</$button><br></$list><br>
+
+<$edit-text tiddler="BackOffice/tempPerson" field="name"/>  <<createPerson>>
+
+<br><br>
+
+<h3>Deal Stages</h3>
+<hr>
+
+{{Edit-Stages}}
+
+<br><br>
+
+<h3>Company Info</h3>
+<hr>
+
+{{Edit-CompanyInfo}}
+
+<br><br>
+
+<h3>Order Form Column Names</h3>
+<hr>
+
+{{Edit-OrderForm}}
+
+<br><br>
+<h3>Agreement Message</h3>
+<hr>
+<$edit-text tiddler="Both/Settings/storage" field="text"/>

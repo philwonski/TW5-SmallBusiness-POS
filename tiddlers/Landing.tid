@@ -1,0 +1,22 @@
+created: 20210516151456493
+modified: 20210516152803632
+tags: 
+title: Landing
+type: text/vnd.tiddlywiki
+
+<h3>
+Hello
+</h3>
+
+The Free POS + CRM app supports up to ''two terminals'', such as a storefront with a cash register/computer up front and a back office computer.
+
+Direct me to:
+<div style="text-align:center">
+<$button class="landingbutton">Front Register
+<$action-sendmessage $message="tm-close-tiddler" $param="Landing"/>
+<$action-navigate $to="FrontDesk/Home"/></$button>
+<br><br>
+<$button class="landingbutton">Back Office
+<$action-sendmessage $message="tm-close-tiddler" $param="Landing"/>
+<$action-navigate $to="BackOffice/Home"/></$button>
+</div>

@@ -1,0 +1,7 @@
+created: 20200816230402762
+modified: 20200818172010592
+revision: 0
+title: $:/config/SaverFilter
+type: text/vnd.tiddlywiki
+
+[is[tiddler] !is[tiddler]]

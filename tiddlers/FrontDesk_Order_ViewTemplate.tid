@@ -1,0 +1,205 @@
+caption: View Order
+created: 20200809143035421
+modified: 20210516145034216
+tags: OrderTemplate FrontDesk
+title: FrontDesk/Order/ViewTemplate
+type: text/vnd.tiddlywiki
+
+\define currate()
+{{{ [[$(corder)$]get[tax]] }}}
+\end
+
+\define totalsbox()
+Subtotal: <$macrocall $name="getsubtotal" ORDER="$(corder)$"/>
+<br>
+Tax: <$macrocall $name="gettax" ORDER="$(corder)$" RATE="$(currate)$" /> 
+<br>
+Total: <$macrocall $name="gettotal" ORDER="$(corder)$" RATE="$(currate)$" />  
+<br>
+<$macrocall $name="listpayments" ORDER="$(corder)$"  /> 
+<br>
+<$macrocall $name="addpaymentFD" ORDER="$(corder)$"  /> 
+<br>
+Balance: <$macrocall $name="balance" ORDER="$(corder)$" RATE="$(currate)$" />
+\end
+
+\define startactions()
+<$action-setfield $tiddler="FrontDesk/Order/SpecialClose" $field="msg" $value="Discard Draft" /><$action-setfield $tiddler="FrontDesk/Order/DIALOGUEstore" $field="ab" $value="FrontDesk/Order/Dg2"/>
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="name" $value={{$(corder)$!!name}} />
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="address" $value={{$(corder)$!!address}} />
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="address2" $value={{$(corder)$!!address2}} />
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="phone" $value={{$(corder)$!!phone}} />
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="phone2" $value={{$(corder)$!!phone2}} />
+<$action-setfield $tiddler="$:/FrontDesk/TempOrder20001" $field="email" $value={{$(corder)$!!email}} />
+<$action-setfield $tiddler="FrontDesk/SearchTerm" $field="term" $value=""/>
+<$action-sendmessage $message="tm-modal" $param="FrontDesk/Order/DIALOGUEshell"/>
+\end
+
+\define head()
+<div style="margin-bottom: -8px;">
+<div class="formHeader" style="width: 20%; float: left; padding: 1.5%; text-align: left;"><br><b>{{CompanyInfo!!company_phone}} phone</b></div>
+
+<div class="formHeader" style="width: 60%; float: left; padding: 1.5%; text-align: center; font-size: 115%;"><b>{{CompanyInfo!!company_name}}<br>{{CompanyInfo!!company_address}}, {{CompanyInfo!!company_address2}}</b></div>
+
+<div class="formHeader" style="width: 20%; float: left; padding: 1.5%; text-align: right;"><b>Order <$view tiddler="$(corder)$" field="ordernumber"/> <br>{{CompanyInfo!!company_fax}} fax</b></div>
+
+</div>
+<div class="floatkill"></div>
+<hr class="thicker_line" >
+\end
+
+\define thistid()
+<<head>>
+<div style="width: 100%;">
+<div style="width=45%; float: left;">
+<br>
+Date: <$view tiddler="$(corder)$" field="orderdate"/><br>
+Clerk: <$view tiddler="$(corder)$" field="clerkname"/><br>
+<br>
+<$view tiddler="$(corder)$" field="name"/>
+<br>
+<$view tiddler="$(corder)$" field="address"/>
+<br>
+<$view tiddler="$(corder)$" field="address2"/>
+<br>
+<$view tiddler="$(corder)$" field="phone"/>
+<br>
+<$view tiddler="$(corder)$" field="phone2"/>
+<br>
+<$view tiddler="$(corder)$" field="email"/>
+<$button style="font-size: 85%; color: grey; border: none; background-color:transparent;"><<startactions>>New Order with this Account</$button>
+</div>
+
+<div style="width:45%; float: right; text-align:left;">
+<br>
+//Order Notes//
+<br>
+<$view tiddler="$(corder)$" field="ordernotes"/><br>
+<$view tiddler="$(corder)$" field="ordernotes2"/><br>
+<$view tiddler="$(corder)$" field="ordernotes3"/><br>
+<$view tiddler="$(corder)$" field="ordernotes4"/><br>
+</div>
+</div>
+<div style="float: none; clear: both; margin-bottom: 25px;"></div>
+
+<hr>
+
+Items
+
+<table class="orderformitems" style="width:100%">
+ <colgroup>
+    <col style="width:3%">
+    <col style="width:150px">
+       <col style="width:180px">
+    <col style="width:33%">
+    <col style="width:70px">
+    <col style="width:70px">
+   <col style="width:8%">
+     <col style="width:8%">
+  </colgroup>  
+<thead>
+  <tr>
+    <th>{{OrderFormColumns!!1}}</th>
+    <th>{{OrderFormColumns!!2}}</th>
+    <th>{{OrderFormColumns!!3}} </th> 
+    <th>{{OrderFormColumns!!4}} <<required>></th>
+    <th>{{OrderFormColumns!!5}}</th>
+    <th>{{OrderFormColumns!!6}}</th> 
+    <th>{{OrderFormColumns!!7}}</th>
+    <th>{{OrderFormColumns!!8}}</th>
+  </tr>
+</thead>
+<tbody>
+<$list filter="[[$(corder)$]has[qty_item01]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="01"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item02]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="02"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item03]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="03"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item04]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="04"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item05]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="05"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item06]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="06"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item07]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="07"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item08]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="08"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item09]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="09"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item10]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="10"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item11]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="11"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item12]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="12"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item13]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="13"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item14]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="14"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item15]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="15"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item16]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="16"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item17]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="17"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item18]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="18"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item19]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="19"/>
+</$list>
+<$list filter="[[$(corder)$]has[qty_item20]]">
+<$macrocall $name="itemsViewRow" ORDER="$(corder)$" ROW="20"/>
+</$list>
+</tbody>
+</table>
+
+
+<div style="width: 30%; float: right; padding-left: 2%;">
+
+
+<$vars currate={{$(corder)$!!tax}} >
+<<totalsbox>>
+</$vars>
+</div>
+
+<div style="width: 65%; float: left; border-top: 1px solid grey; padding:1.5%;">
+Comments:
+
+<$macrocall $name="listcomments" ORDER="$(corder)$"  />
+
+<br>
+<$macrocall $name="NEWlistcomments" ORDER="$(corder)$"  />
+
+<br>
+<div></div>
+<$macrocall $name="NEWaddcommentFrontDesk" ORDER="$(corder)$"  />
+<br>
+
+</div>
+<div class="floatkill"></div>
+
+\end
+
+<$vars corder=<<corder>> >
+<<thistid>>
+</$vars>

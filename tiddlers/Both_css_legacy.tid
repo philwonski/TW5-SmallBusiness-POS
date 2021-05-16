@@ -1,0 +1,461 @@
+created: 20200802131328998
+modified: 20200809195753022
+revision: 0
+tags: $:/tags/Stylesheet
+title: Both/css/legacy
+type: text/vnd.tiddlywiki
+
+.orderstablemanager4 { display: none; }
+
+.orderstablemanager5 { display: none; }
+
+.orderstablemanager6 { display: none; }
+
+.orderstablemanager7 { display: none; }
+
+.ordersearchresultsmanager0 { display: none; }
+
+.ordersearchresultsmanager1 { display: none; }
+
+.ordersearchresultsmanager2 { display: none; }
+
+.ordersearchresultsmanager3 { display: none; }
+
+.orderstableclerk4 { display: none; }
+
+.orderstableclerk5 { display: none; }
+
+.orderstableclerk6 { display: none; }
+
+.orderstableclerk7 { display: none; }
+
+.ordersearchresultsclerk0 { display: none; }
+
+.ordersearchresultsclerk1 { display: none; }
+
+.ordersearchresultsclerk2 { display: none; }
+
+.ordersearchresultsclerk3 { display: none; }
+
+
+.additem {
+  border: none;
+ background: transparent;
+ color: lightgrey;
+ fill:lightgrey;
+}
+
+.printnowbutton {
+ text-align: center;
+ background-color: red;
+ color: white;
+ font-weight: bold;
+}
+
+.add2cart {
+ height=3em;
+ margin: auto;
+ padding: 8px;
+ text-align: center;
+ background-color: red;
+ color: white;
+}
+
+.smallericon{
+ height: 5px;
+}
+
+.editorheader{
+ background-color: {{editbarcolor}};
+ color: white;
+ border-radius: 0;
+ border: 0px;
+ width: 100%;
+ fill:white;
+}
+
+.editorheader2{
+ background-color: {{editbarcolor}};
+ color: white;
+ border-radius: 0;
+ border: 0px;
+ fill:white;
+}
+
+.bigeditor{
+ width: 100%;
+ min-height: 150px;
+}
+
+.unlockbar {
+  border-radius: 25px 25px 0px 0px;
+  background: darkred;
+  color: white;
+  width: 100%;
+  height: 45px;
+ font-weight: bold;
+ border: none;
+}
+
+.checkoutbutton {
+ background-color: darkgreen;
+ color: white;
+}
+
+.checkoutflowb {
+ display:none;
+}
+
+.smallbluelink {
+ border: none;
+ background: transparent;
+ color: grey;
+ font-size: 73%;
+}
+
+.linkbutton {
+ border: none;
+ background: transparent;
+ color: blue;
+ fill:blue;
+}
+
+.accountreveal {
+ display: none;
+}
+
+.accountreveal1 {
+ display: none;
+}
+
+.accountreveal2 {
+ display: none;
+}
+
+.modallink {
+
+ border: none;
+ background-color: inherit;
+ fill: none;
+ color: blue;
+}
+
+.orderformitems {
+
+  table-layout: auto;
+
+}
+
+.accordian {
+
+ border: 0px;
+ background-color: grey;
+ width: 100%;
+ color: white;
+ fill: white;
+ text-align: left;
+ padding-left: 4px;
+ padding-top: 3px;
+ padding-bottom: 3px;
+ margin-top: 29px;
+
+}
+
+.ypaper {
+  background-color: cornsilk; 
+  padding: 2.2%;
+} 
+
+[data-tags*="Report"] .tc-tags-wrapper {
+ display: none;
+}
+
+[data-tags*="Report"] .tc-subtitle {
+ display: none;
+}
+
+[data-tags*="Report"]  {
+  background-color: #f5f5f5;
+  border: 0px;
+ box-shadow: none;
+}
+
+[data-tags*="Report"]  .tc-tiddler-shadow {
+ border: 0px;
+ box-shadow: none;
+}
+
+
+[data-tags*="Order"] .tc-tags-wrapper {
+ width: 75%;
+}
+
+[data-tags*="Order"] .advancetag {
+ transform: translate(68%, -36px);
+ margin-bottom: -15px;
+ 
+}
+
+[data-tags*="Order"] .tc-subtitle {
+ display: none;
+height: 0px;
+}
+
+.StageNum5 {
+  display: none;
+
+}
+
+.StageNum1 {
+  float: right;
+ text-align: right;
+ width: 40%;
+}
+
+.StageNum2 {
+  float: right;
+ text-align: right;
+ width: 40%;
+}
+
+.StageNum3 {
+  float: right;
+ text-align: right;
+ width: 40%;
+}
+
+.StageNum4 {
+  float: right;
+ text-align: right;
+ width: 40%;
+}
+
+
+.StageNumRB1 {
+  display: none;
+
+}
+
+.StageNumRB2 {
+  float: left;
+ width:40%;
+}
+
+.StageNumRB3 {
+  float: left;
+ width: 40%;
+}
+
+.StageNumRB4 {
+  float: left;
+ width: 40%;
+}
+
+.StageNumRB5 {
+  float: left;
+ width: 40%;
+}
+
+
+
+.fullbox {
+
+ width: 100%;
+
+}
+
+[data-tags*="OrderForm"] .tc-titlebar {
+ display: none;
+ height: 0px;
+}
+
+[data-tags*="OrderForm"] .tc-subtitle {
+ display: none;
+height: 0px;
+}
+
+[data-tags*="OrderForm"] .tc-tags-wrapper {
+ display: none;
+height: 0px;
+}
+
+.formFont { 
+
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+.silent tr {
+
+ border: 0px;
+
+}
+
+.silent td {
+
+ border: 0px;
+
+}
+
+.silent table {
+
+ border: 0px;
+
+}
+
+.silent {
+
+ border: 0px;
+ font-family: "Times New Roman", Times, serif;
+ font-size: 90%;
+  margin-bottom: -12px;
+
+}
+
+.formHeader {
+  font-family: "Times New Roman", Times, serif;
+  margin-bottom: -18px;
+}
+
+.thicker_line {
+  border: 1.4px solid;
+}
+
+.sscell {
+ border: 0px;
+ width: 100%;
+}
+
+.sscell2 {
+ border: 0px;
+  width: 85%;
+  transform: translate(8%, 0px);
+  overflow: hidden; 
+ text-align: right;
+}
+
+
+
+.sscellu {
+ border-bottom: 1px solid lightgrey;
+ border-top: 0px;
+ border-left: 0px;
+ border-right: 0px;
+}
+
+
+
+[data-tags*="OrderFormO"] .tc-tiddler-body {
+  display: block;
+  padding: 14px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  padding: 0 3px 2px;
+  border-radius: 3px;
+  font-family: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace;
+}
+
+[data-tags*="OrderForm"] .tc-title {
+ height: 6px;
+}
+
+.formHeader {
+
+  width: 100%;
+
+}
+
+.row2wrapper {
+
+  width: 100%;
+
+}
+
+.accountBox {
+
+  width: 49%;
+  padding: 2%;
+  float: left;
+
+}
+
+.notesBox {
+
+  width: 49%;
+  padding: 2%;
+   float: left;
+
+}
+
+.tablewrapper {
+
+  width: 100%;
+
+}
+
+.tableHeader {
+
+  width: 100%;
+  border: 2px solid;
+
+}
+
+.tableItems {
+
+  width: 100%;
+  border: 1px solid;
+
+}
+
+.footerwrapper {
+
+  width: 100%;
+
+}
+
+.footerSignature {
+
+  width: 64%;
+  padding: 2%;
+  float: left;
+
+}
+
+.footerMath {
+
+  width: 34%;
+  padding: 2%;
+   float: left;
+
+}
+
+
+.floatkill {
+
+ float: none;
+ clear: both;
+
+}
+
+.table-container {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+  background-color: red;
+}
+
+.table-row {
+    display: table-row; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+  background-color: red;
+}
+
+.col {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+  background-color: green;
+ padding: 2%;
+}

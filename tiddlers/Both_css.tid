@@ -1,0 +1,70 @@
+created: 20200709185436902
+modified: 20210516153834459
+tags: BackOffice FrontDesk $:/tags/Stylesheet
+title: Both/css
+type: text/vnd.tiddlywiki
+
+textarea { width: 100%; }
+
+.toggler{ background-color: transparent; border: none;}
+
+.landingbutton { border: none; background-color: green; color: white; padding: 2%; font-weight: 600; width: 65%; font-size: 120%;}
+
+.tc-alert {display: none;}
+
+.newcomments { display: block; background-color: whitesmoke; padding: 6px; margin: 10px;}
+
+.nctext { display:block; color: blue; }
+
+.ncdate { align: right; padding-top: 4px; font-size: 70%; color: grey; }
+
+
+.tinybutton { background-color: transparent; color: grey; border: none; font-size: 66%;}
+
+[data-tags*="Home"] .tc-titlebar {
+ display: none;
+ height: 0px;
+}
+
+[data-tags*="Home"] .tc-subtitle {
+ display: none;
+height: 0px;
+}
+
+[data-tags*="Home"] .tc-tags-wrapper {
+ display: none;
+height: 0px;
+}
+
+[data-tags*="Home"] {
+ background-color: transparent;
+ border: none;
+}
+
+.nobook { display: none;}
+
+.commentbox { background-color: azure; padding: 1.5%; margin-bottom: 10px; margin-right: 9%; }
+
+.editorderinfo { padding-left: 1.5%; padding-right: 1.5%; padding-top: 1%; padding-bottom: 1%; margin-right: 70%;}
+
+.searchResults { color: blue; background: transparent; border: none; cursor: pointer;}
+
+.startOrderButton { color: white; background: green; border: none; cursor: pointer; padding: 1.5%; margin-top: -5px; margin-left: 50px;}
+
+.textbutton { background: transparent; border: none; color: blue; cursor: pointer;}
+
+.tagbarL1 {display:none;}
+
+.tagbarL0 {display:none;}
+
+.tagbarL9 {display:none;}
+
+.tagbarR9 {display:none;}
+
+.tagbarR6 {display:none;}
+
+.tagbarbutton { border: none; fill: black; background-color: transparent; font-weight: bold; }
+
+.moreitemsbutton {border: none; background-color: transparent; font-size: 80%; color: grey }
+
+

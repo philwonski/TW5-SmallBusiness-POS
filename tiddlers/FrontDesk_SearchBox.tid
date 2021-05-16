@@ -1,0 +1,23 @@
+created: 20200809020227227
+modified: 20200809020409704
+revision: 0
+tags: View FrontDesk
+title: FrontDesk/SearchBox
+type: text/vnd.tiddlywiki
+
+<div style="width: 100%; text-align: center;">
+
+<div style="width: 68%; float: left; text-align: right;">
+
+<$edit-text tiddler="FrontDesk/SearchTerm" field="term" size="45" placeholder="name, street address, last 4 of phone #, order num "/> <$button style="background-color: transparent; border: none;"><$action-setfield $tiddler="FrontDesk/SearchTerm" $field="term" $value=""/>{{$:/core/images/close-button}}</$button>
+</div>
+
+<div style="width: 28%; float: left; text-align: left;">
+
+{{FrontDesk/Button/StartOrder}}
+
+</div>
+
+</div> 
+
+<div style="float: none; clear:both;"></div>

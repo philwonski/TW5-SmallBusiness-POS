@@ -1,0 +1,32 @@
+closeactions: <$button><$action-sendmessage $message="tm-close-tiddler"/>close</$button>
+created: 20200809142655102
+modified: 20201018160316876
+printactions: <$button><$action-sendmessage $message="tm-open-window" $param=<<corder>> template="BackOffice/Order/PRINTViewTemplate" corder=<<corder>> />Print</$button>
+revision: 0
+subtitle: <div><div style="width: 50%; float: left;"> Order <$view tiddler=<<corder>> field="ordernumber"/></div> <div style="width: 50%; float: right; text-align: right;"> {{!!printactions}} {{!!closeactions}} </div></div><div style="float:none; clear:both;"></div>
+tags: Model FrontDesk
+title: FrontDesk/Modal/OrderTabs
+type: text/vnd.tiddlywiki
+
+\define tagbar()
+<div style="width: 50%; float: left;">
+<div class={{{ [<corder>get[stage]] +[addprefix[tagbarL]] }}} >
+<$macrocall $name="NEWreverseOrderFD" ORDER=<<corder>>/>  
+</div>
+</div>
+
+<div style="width: 50%; float: right; text-align: right;">
+<div class={{{ [<corder>get[stage]] +[addprefix[tagbarR]] }}} >
+ <$macrocall $name="NEWadvanceOrderFD" ORDER=<<corder>>/>  
+</div>
+</div>
+<div style="float: none; clear: both;"/>
+\end
+
+<div style="text-align: center; font-size: 130%; font-weight: bold;">
+<$macrocall $name="showStage" ORDER=<<corder>>/>  
+</div>
+
+<<tagbar>>
+
+<<tabs "FrontDesk/Order/ViewTemplate FrontDesk/Order/EditTemplate" default:"FrontDesk/Order/ViewTemplate" >>

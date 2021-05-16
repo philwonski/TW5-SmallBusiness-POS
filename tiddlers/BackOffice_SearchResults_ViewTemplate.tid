@@ -1,0 +1,16 @@
+created: 20200704194509479
+modified: 20200704194536250
+revision: 0
+tags: BackOffice List
+title: BackOffice/SearchResults/ViewTemplate
+type: text/vnd.tiddlywiki
+
+\define results()
+<$list filter="[tag[Order]] +[search:fn{BackOffice/SearchTerm!!term}] ">{{!!title}}<br></$list>
+\end
+
+\define results2()
+<$list filter="[tag[Order]] +[search:ordernumber{BackOffice/SearchTerm!!term}]">{{!!title}}<br></$list>
+\end
+
+{{

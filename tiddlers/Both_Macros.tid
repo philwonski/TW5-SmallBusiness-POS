@@ -1,0 +1,445 @@
+created: 20200710222005868
+modified: 20201020155453203
+revision: 0
+tags: $:/tags/Macro
+title: Both/Macros
+type: text/vnd.tiddlywiki
+
+\define clerkselect()
+<$list filter="[tag[Clerk]!hide[yes]sort[weight]]"><$radio tiddler="BackOffice/StartOrder/storage" field="clerkname" value={{!!title}} > {{!!title}}</$radio><br></$list>
+\end
+
+\define clerkselect_front()
+<$list filter="[tag[Clerk]!hide[yes]sort[weight]]"><$radio tiddler="FrontDesk/StartOrder/storage" field="clerkname" value={{!!title}} > {{!!title}}</$radio><br></$list>
+\end
+
+\define getextprice(ORDER, ITEM)
+<$set name="qty" value={{{ [[$ORDER$]get[qty_item$ITEM$]] }}}><$text text={{{ [[$ORDER$]get[unit_item$ITEM$]multiply<qty>fixed[2]] }}}/></$set>
+\end
+
+\define paymenteditor(ORDER)
+<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
+
+<$button class="tinybutton" set="$:/state/SampleReveal2" setTo="show">Edit Payments</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/SampleReveal2" text="show">
+
+<$button class="tinybutton" set="$:/state/SampleReveal2" setTo="hide">Done Editing Payments</$button>
+
+<i>Payment 1</i><br>
+Amount: <$edit-text tiddler="$ORDER$" field="payment1"/><br>
+Type: <$edit-text tiddler="$ORDER$" field="p_ayment1type"/><br>
+Check #: <$edit-text tiddler="$ORDER$" field="pa_yment1check"/><br>
+<br>
+<i>Payment 1</i><br>
+Amount: <$edit-text tiddler="$ORDER$" field="payment2"/><br>
+Type: <$edit-text tiddler="$ORDER$" field="p_ayment2type"/><br>
+Check #: <$edit-text tiddler="$ORDER$" field="pa_yment2check"/><br>
+<br>
+<i>Payment 1</i><br>
+Amount: <$edit-text tiddler="$ORDER$" field="payment3"/><br>
+Type: <$edit-text tiddler="$ORDER$" field="p_ayment3type"/><br>
+Check #: <$edit-text tiddler="$ORDER$" field="pa_yment3check"/><br>
+<br>
+</$reveal>
+\end
+
+\define showStage(ORDER)
+<$list filter="[[$ORDER$]get[stage]]" variable="stage"><$list filter="[[Both/Stages]getindex<stage>]">{{!!title}}</$list></$list>
+\end
+
+\define itemsEditRow(ORDER, ROW)
+<tr>
+    <td><$edit-text class="sscell" tiddler="$ORDER$" field="qty_item$ROW$"/>
+</td>
+ <td><$edit-text class="sscell "tiddler="$ORDER$" field="vendor_item$ROW$"/></td>
+   <td><$edit-text class="sscell" tiddler="$ORDER$" field="num_item$ROW$"/></td>
+ <td><$edit-text class="sscell" tiddler="$ORDER$" field="desc_item$ROW$"/></td>
+       <td><$edit-text class="sscell" tiddler="$ORDER$" field="color_item$ROW$"/></td>
+    <td><$edit-text class="sscell" tiddler="$ORDER$" field="function_item$ROW$"/></td>
+    <td><div style="float:left;width:15%;">$</div><div style="float:right; width:85%; text-align: right;"><$edit-text class="sscell" tiddler="$ORDER$" field="unit_item$ROW$"/></div></td>
+   <td><div style="float:left;width:10%;">$</div><div style="float:right;width:89%; text-align: right;"><$macrocall $name="getextprice" ORDER="$ORDER$" ITEM="$ROW$"/></div></td>
+  </tr>
+\end
+
+\define itemsViewRow(ORDER, ROW)
+<tr>
+    <td>
+<$view tiddler="$ORDER$" field="qty_item$ROW$"/>
+</td>
+ <td><$view tiddler="$ORDER$" field="vendor_item$ROW$"/></td>
+   <td><$view tiddler="$ORDER$" field="num_item$ROW$"/></td>
+ <td><$view tiddler="$ORDER$" field="desc_item$ROW$"/></td>
+       <td><$view tiddler="$ORDER$" field="color_item$ROW$"/></td>
+    <td><$view tiddler="$ORDER$" field="function_item$ROW$"/></td>
+    <td><div style="float:left;width:15%;">$</div><div style="float:right; width:85%; text-align: right;"><$view tiddler="$ORDER$" field="unit_item$ROW$"/></div></td>
+   <td><div style="float:left;width:10%;">$</div><div style="float:right;width:89%; text-align: right;"><$macrocall $name="getextprice" ORDER="$ORDER$" ITEM="$ROW$"/></div></td>
+  </tr>
+\end
+
+\define NEWadvanceOrder(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[add[1]]" variable="nextstage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<nextstage>>/><$action-createtiddler $basetitle=<<now order_boc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{{ [[Both/Stages]getindex<nextstage>] +[addprefix[Order advanced to ]] }}} writer= {{BackOffice/StartOrder/storage!!clerkname}}/>Advance to 
+ <$list filter="[[Both/Stages]getindex<nextstage>]">{{!!title}}</$list> {{$:/core/images/chevron-right}}</$button>
+</$list>
+\end
+
+\define NEWreverseOrder(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[subtract[1]]" variable="laststage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<laststage>>/><$action-createtiddler $basetitle=<<now order_boc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{{ [[Both/Stages]getindex<laststage>] +[addprefix[Order pulled back to ]] }}} writer={{BackOffice/StartOrder/storage!!clerkname}}/>{{$:/core/images/chevron-left}} Pull back to
+ <$list filter="[[Both/Stages]getindex<laststage>]">{{!!title}}</$list></$button>
+</$list>
+\end
+
+\define NEWadvanceOrderFD(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[add[1]]" variable="nextstage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<nextstage>>/><$action-createtiddler $basetitle=<<now order_boc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{{ [[Both/Stages]getindex<nextstage>] +[addprefix[Order advanced to ]] }}} writer= {{FrontDesk/StartOrder/storage!!clerkname}}/>Advance to 
+ <$list filter="[[Both/Stages]getindex<nextstage>]">{{!!title}}</$list> {{$:/core/images/chevron-right}}</$button>
+\end
+
+\define NEWreverseOrderFD(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[subtract[1]]" variable="laststage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<laststage>>/><$action-createtiddler $basetitle=<<now order_boc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{{ [[Both/Stages]getindex<laststage>] +[addprefix[Order pulled back to ]] }}} writer={{FrontDesk/StartOrder/storage!!clerkname}}/>{{$:/core/images/chevron-left}} Pull back to
+ <$list filter="[[Both/Stages]getindex<laststage>]">{{!!title}}</$list></$button>
+</$list>
+\end
+
+\define advanceOrder(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[add[1]]" variable="nextstage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<nextstage>>/><$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{{ [[Both/Stages]getindex<nextstage>] +[addprefix[Order advanced to ]] +[addsuffix[. -  ]] +[addsuffix{BackOffice/StartOrder/storage!!clerkname}] +[addsuffix[_]] +[addsuffix<now MM/DD/YYYY>] }}} />Advance to 
+ <$list filter="[[Both/Stages]getindex<nextstage>]">{{!!title}}</$list> {{$:/core/images/chevron-right}}</$button>
+</$list>
+\end
+
+\define reverseOrder(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[subtract[1]]" variable="laststage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<laststage>>/><$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{{ [[Both/Stages]getindex<laststage>] +[addprefix[Order pulled back to ]] +[addsuffix[. -]] +[addsuffix{BackOffice/StartOrder/storage!!clerkname}] +[addsuffix[_]] +[addsuffix<now MM/DD/YYYY>] }}} />{{$:/core/images/chevron-left}} Pull back to
+ <$list filter="[[Both/Stages]getindex<laststage>]">{{!!title}}</$list></$button>
+</$list>
+\end
+
+\define advanceOrderFD(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[add[1]]" variable="nextstage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<nextstage>>/><$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{{ [[Both/Stages]getindex<nextstage>] +[addprefix[Order advanced to ]] +[addsuffix[. -  ]] +[addsuffix{FrontDesk/StartOrder/storage!!clerkname}] +[addsuffix[_]] +[addsuffix<now MM/DD/YYYY>] }}} />Advance to 
+ <$list filter="[[Both/Stages]getindex<nextstage>]">{{!!title}}</$list> {{$:/core/images/chevron-right}}</$button>
+</$list>
+\end
+
+\define reverseOrderFD(ORDER)
+<$list filter="[[$ORDER$]get[stage]] +[subtract[1]]" variable="laststage"><$button class="tagbarbutton"><$action-setfield $tiddler="$ORDER$" $field="stage" $value=<<laststage>>/><$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{{ [[Both/Stages]getindex<laststage>] +[addprefix[Order pulled back to ]] +[addsuffix[. -]] +[addsuffix{FrontDesk/StartOrder/storage!!clerkname}] +[addsuffix[_]] +[addsuffix<now MM/DD/YYYY>] }}} />{{$:/core/images/chevron-left}} Pull back to
+ <$list filter="[[Both/Stages]getindex<laststage>]">{{!!title}}</$list></$button>
+</$list>
+\end
+
+\define NEWlistcomments(ORDER)
+<$list filter="[tag[$ORDER$]sort[created]]" template="Both/comment_template"/>
+\end
+
+\define listcomments(ORDER)
+<$list filter="[[$ORDER$]fields[]] +[search:title[com_]sort[title]]" variable="comments"><$list filter="[[$ORDER$]get<comments>]"><div class="commentbox">{{!!title}}</div></$list></$list>
+\end
+
+\define NEWlistcommentsEDITOR(ORDER)
+<$list filter="[tag[$ORDER$]]"><$edit-text field="text" /><br><br></$list>
+\end
+
+\define listcommentsEDITOR(ORDER)
+<$list filter="[[$ORDER$]fields[]] +[search:title[com_]sort[title]]" variable="comments"><$edit-text tiddler="$ORDER$" field=<<comments>> tag="textarea" /><br><br></$list>
+\end
+
+\define NEWaddcommentBackOffice(ORDER)
+<div>
+<div style="width: 80%; float:left; margin-top: 25px;">
+<$edit-text class="sscellu" size="60" tiddler="BackOffice/Temp/comment" field="text" tag="textarea"/></div>
+<div style="width: 15%; float:left; margin-top: 25px;">
+<$button>
+<$action-createtiddler $basetitle=<<now order_boc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{BackOffice/Temp/comment!!text}} writer={{BackOffice/StartOrder/storage!!clerkname}} />
+<$action-setfield $tiddler="BackOffice/Temp/comment" $field="text" $value="" />
+Comment {{$:/core/images/add-comment}}</$button>
+<div style="float:none;clear:both;"/>
+\end
+
+\define NEWaddcommentFrontDesk(ORDER)
+<div>
+<div style="width: 80%; float:left; margin-top: 25px;">
+<$edit-text class="sscellu" size="60" tiddler="FrontDesk/Temp/comment" field="text" tag="textarea"/></div>
+<div style="width: 15%; float:left; margin-top: 25px;">
+<$button>
+<$action-createtiddler $basetitle=<<now order_fdc_YYYY_0MM_DD_0hh_0mm_0ss>> tags="[[$ORDER$]]" text={{FrontDesk/Temp/comment!!text}} writer={{FrontDesk/StartOrder/storage!!clerkname}} />
+<$action-setfield $tiddler="FrontDesk/Temp/comment" $field="text" $value="" />
+Comment {{$:/core/images/add-comment}}</$button>
+<div style="float:none;clear:both;"/>
+\end
+
+\define addcommentBackOffice(ORDER)
+<div>
+<div style="width: 80%; float:left; margin-top: 25px;">
+<$edit-text class="sscellu" size="60" tiddler="BackOffice/Temp/comment" field="text" tag="textarea"/></div>
+<div style="width: 15%; float:left; margin-top: 25px;">
+<$button>
+<$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{BackOffice/Temp/comment!!text}} />
+<$action-setfield $tiddler="BackOffice/Temp/comment" $field="comment" $value="" />
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter=""" -"""/>
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter={{BackOffice/StartOrder/storage!!clerkname}}/><$action-listops $tiddler="$ORDER$" $field={{ [[$ORDER$]fields[]] +[search:title[com_]removeprefix[com_]] +[add[1]] +[addprefix[com_]] }}} $subfilter=""" """/>
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter=<<now MM/DD/YYYY>>/>
+Comment {{$:/core/images/add-comment}}</$button>
+<div style="float:none;clear:both;"/>
+\end
+
+\define addcommentBackOfficeTEXT()
+{{BackOffice/Temp/comment!!comment}} -{{BackOffice/StartOrder/storage!!clerkname}} <span style="color:grey"><<now>></span>
+\end
+
+\define addcommentFrontDesk(ORDER)
+<div>
+<div style="width: 80%; float:left; margin-top: 25px;">
+<$edit-text class="sscellu" size="60" tiddler="FrontDesk/Temp/comment" field="comment" tag="textarea"/></div>
+<div style="width: 15%; float:left; margin-top: 25px;">
+<$button>
+<$action-setfield $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $value={{FrontDesk/Temp/comment!!comment}} />
+<$action-setfield $tiddler="FrontDesk/Temp/comment" $field="comment" $value="" />
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter=""" -"""/>
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter={{FrontDesk/StartOrder/storage!!clerkname}}/>
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter=""" """/>
+<$action-listops $tiddler="$ORDER$" $field=<<now com_YYYY_0MM_DD_0hh_0mm_0ss>> $subfilter=<<now MM/DD/YYYY>>/>
+Comment {{$:/core/images/add-comment}}</$button>
+<div style="float:none;clear:both;"/>
+\end
+
+\define addcommentFrontDeskTEXT()
+{{FrontDesk/Temp/comment!!comment}} -{{FrontDesk/StartOrder/storage!!clerkname}} <span style="color:grey"><<now>></span>
+\end
+
+\define refreshpg()
+<$button tooltip="Refresh Data" style="background-color: transparent; border: none; font-size: 130%; cursor: pointer;"><$action-sendmessage $message="tm-browser-refresh"/>{{$:/core/images/refresh-button}}</$button>
+\end
+
+\define listpayments(ORDER)
+<$list filter="[[$ORDER$]has[payment1]get[payment1]]">Payment: {{!!title}}</$list> <$list filter="[[$ORDER$]has[p_ayment1type]get[p_ayment1type]]">({{!!title}}</$list><$list filter="[[$ORDER$]has[pa_yment1check]get[pa_yment1check]]"> {{!!title}}</$list><$list filter="[[$ORDER$]has[p_ayment1type]get[p_ayment1type]]">)</$list><br>
+
+<$list filter="[[$ORDER$]has[payment2]get[payment2]]">Payment: {{!!title}}</$list> <$list filter="[[$ORDER$]has[p_ayment2type]get[p_ayment2type]]">({{!!title}}</$list><$list filter="[[$ORDER$]has[pa_yment2check]get[pa_yment2check]]"> {{!!title}}</$list><$list filter="[[$ORDER$]has[p_ayment2type]get[p_ayment2type]]">)</$list><br>
+
+<$list filter="[[$ORDER$]has[payment3]get[payment3]]">Payment: {{!!title}}</$list> <$list filter="[[$ORDER$]has[p_ayment3type]get[p_ayment3type]]">({{!!title}}</$list><$list filter="[[$ORDER$]has[pa_yment3check]get[pa_yment3check]]"> {{!!title}}</$list><$list filter="[[$ORDER$]has[p_ayment3type]get[p_ayment3type]]">)</$list><br>
+\end
+
+\define addpayment(ORDER)
+<$vars MYORDER="$ORDER$">
+<$list filter="[[$ORDER$]!has[payment1]]"><<addpayment1>></$list>
+<$list filter="[[$ORDER$]has[payment1]!has[payment2]]"><<addpayment2>></$list>
+<$list filter="[[$ORDER$]has[payment1]has[payment2]!has[payment3]]"><<addpayment3>></$list>
+</$vars>
+\end
+
+\define addpaymentFD(ORDER)
+<$vars MYORDER="$ORDER$">
+<$list filter="[[$ORDER$]!has[payment1]]"><<addpayment1FD>></$list>
+<$list filter="[[$ORDER$]has[payment1]!has[payment2]]"><<addpayment2FD>></$list>
+<$list filter="[[$ORDER$]has[payment1]has[payment2]!has[payment3]]"><<addpayment3FD>></$list>
+</$vars>
+\end
+
+\define addpayment1()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment1" p_aymentnum="p_ayment1type" pa_ymentnum="pa_yment1check"/>Add a Payment (1)</$button>
+\end
+
+\define addpayment2()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment2" p_aymentnum="p_ayment2type" pa_ymentnum="pa_yment2check"/>Add a Payment (2)</$button>
+\end
+
+\define addpayment3()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment3" p_aymentnum="p_ayment3type" pa_ymentnum="pa_yment3check"/>Add a Payment (3)</$button>
+\end
+
+\define addpayment1FD()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment1" p_aymentnum="p_ayment1type" pa_ymentnum="pa_yment1check"/>Add a Payment (1)</$button>
+\end
+
+\define addpayment2FD()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment2" p_aymentnum="p_ayment2type" pa_ymentnum="pa_yment2check"/>Add a Payment (2)</$button>
+\end
+
+\define addpayment3FD()
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/AddPayment" MYORDER="$(MYORDER)$" paymentnum="payment3" p_aymentnum="p_ayment3type" pa_ymentnum="pa_yment3check"/>Add a Payment (3)</$button>
+\end
+
+\define getsubtotal(ORDER)
+<$set name="ti1" value={{{ =[[$ORDER$]has[qty_item01]get[qty_item01]else[0]] =[[$ORDER$]has[unit_item01]get[unit_item01]else[0]]  +[product[]] }}}>
+<$set name="ti2" value={{{ =[[$ORDER$]has[qty_item02]get[qty_item02]else[0]] =[[$ORDER$]has[unit_item02]get[unit_item02]else[0]]  +[product[]] }}}>
+<$set name="ti3" value={{{ =[[$ORDER$]has[qty_item03]get[qty_item03]else[0]] =[[$ORDER$]has[unit_item03]get[unit_item03]else[0]]  +[product[]] }}}>
+<$set name="ti4" value={{{ =[[$ORDER$]has[qty_item04]get[qty_item04]else[0]] =[[$ORDER$]has[unit_item04]get[unit_item04]else[0]]  +[product[]] }}}>
+<$set name="ti5" value={{{ =[[$ORDER$]has[qty_item05]get[qty_item05]else[0]] =[[$ORDER$]has[unit_item05]get[unit_item05]else[0]]  +[product[]] }}}>
+<$set name="ti6" value={{{ =[[$ORDER$]has[qty_item06]get[qty_item06]else[0]] =[[$ORDER$]has[unit_item06]get[unit_item06]else[0]]  +[product[]] }}}>
+<$set name="ti7" value={{{ =[[$ORDER$]has[qty_item07]get[qty_item07]else[0]] =[[$ORDER$]has[unit_item07]get[unit_item07]else[0]] +[product[]] }}}>
+<$set name="ti8" value={{{ =[[$ORDER$]has[qty_item08]get[qty_item08]else[0]] =[[$ORDER$]has[unit_item08]get[unit_item08]else[0]]  +[product[]] }}}>
+<$set name="ti9" value={{{ =[[$ORDER$]has[qty_item09]get[qty_item09]else[0]] =[[$ORDER$]has[unit_item09]get[unit_item09]else[0]]  +[product[]] }}}>
+<$set name="ti10" value={{{ =[[$ORDER$]has[qty_item10]get[qty_item10]else[0]] =[[$ORDER$]has[unit_item10]get[unit_item10]else[0]]  +[product[]] }}}>
+<$set name="ti11" value={{{ =[[$ORDER$]has[qty_item11]get[qty_item11]else[0]] =[[$ORDER$]has[unit_item11]get[unit_item11]else[0]]  +[product[]] }}}>
+<$set name="ti12" value={{{ =[[$ORDER$]has[qty_item12]get[qty_item12]else[0]] =[[$ORDER$]has[unit_item12]get[unit_item12]else[0]]  +[product[]] }}}>
+<$set name="ti13" value={{{ =[[$ORDER$]has[qty_item13]get[qty_item13]else[0]] =[[$ORDER$]has[unit_item13]get[unit_item13]else[0]]  +[product[]] }}}>
+<$set name="ti14" value={{{ =[[$ORDER$]has[qty_item14]get[qty_item14]else[0]] =[[$ORDER$]has[unit_item14]get[unit_item14]else[0]]  +[product[]] }}}>
+<$set name="ti15" value={{{ =[[$ORDER$]has[qty_item15]get[qty_item15]else[0]] =[[$ORDER$]has[unit_item15]get[unit_item15]else[0]]  +[product[]] }}}>
+<$set name="ti16" value={{{ =[[$ORDER$]has[qty_item16]get[qty_item16]else[0]] =[[$ORDER$]has[unit_item16]get[unit_item16]else[0]]  +[product[]] }}}>
+<$set name="ti17" value={{{ =[[$ORDER$]has[qty_item17]get[qty_item17]else[0]] =[[$ORDER$]has[unit_item17]get[unit_item17]else[0]]  +[product[]] }}}>
+<$set name="ti18" value={{{ =[[$ORDER$]has[qty_item18]get[qty_item18]else[0]] =[[$ORDER$]has[unit_item18]get[unit_item18]else[0]]  +[product[]] }}}>
+<$set name="ti19" value={{{ =[[$ORDER$]has[qty_item19]get[qty_item19]else[0]] =[[$ORDER$]has[unit_item19]get[unit_item19]else[0]]  +[product[]] }}}>
+<$set name="ti20" value={{{ =[[$ORDER$]has[qty_item20]get[qty_item20]else[0]] =[[$ORDER$]has[unit_item20]get[unit_item20]else[0]]  +[product[]] }}}>
+<$text text={{{ =[<ti1>] =[<ti2>] =[<ti3>] =[<ti4>] =[<ti5>] =[<ti6>] =[<ti7>] =[<ti8>] =[<ti9>] =[<ti10>]  =[<ti11>]  =[<ti12>]  =[<ti13>]  =[<ti14>]  =[<ti15>]  =[<ti16>]  =[<ti17>]  =[<ti18>]  =[<ti19>]  =[<ti20>] +[sum[]fixed[2]] }}}/></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set>
+\end
+
+\define gettax(ORDER, RATE)
+<$set name="ti1" value={{{ =[[$ORDER$]has[qty_item01]get[qty_item01]else[0]] =[[$ORDER$]has[unit_item01]get[unit_item01]else[0]]  +[product[]] }}}>
+
+<$set name="ti2" value={{{ =[[$ORDER$]has[qty_item02]get[qty_item02]else[0]] =[[$ORDER$]has[unit_item02]get[unit_item02]else[0]]  +[product[]] }}}>
+
+<$set name="ti3" value={{{ =[[$ORDER$]has[qty_item03]get[qty_item03]else[0]] =[[$ORDER$]has[unit_item03]get[unit_item03]else[0]]  +[product[]] }}}>
+
+<$set name="ti4" value={{{ =[[$ORDER$]has[qty_item04]get[qty_item04]else[0]] =[[$ORDER$]has[unit_item04]get[unit_item04]else[0]]  +[product[]] }}}>
+
+<$set name="ti5" value={{{ =[[$ORDER$]has[qty_item05]get[qty_item05]else[0]] =[[$ORDER$]has[unit_item05]get[unit_item05]else[0]]  +[product[]] }}}>
+
+<$set name="ti6" value={{{ =[[$ORDER$]has[qty_item06]get[qty_item06]else[0]] =[[$ORDER$]has[unit_item06]get[unit_item06]else[0]]  +[product[]] }}}>
+
+<$set name="ti7" value={{{ =[[$ORDER$]has[qty_item07]get[qty_item07]else[0]] =[[$ORDER$]has[unit_item07]get[unit_item07]else[0]] +[product[]] }}}>
+
+<$set name="ti8" value={{{ =[[$ORDER$]has[qty_item08]get[qty_item08]else[0]] =[[$ORDER$]has[unit_item08]get[unit_item08]else[0]]  +[product[]] }}}>
+
+<$set name="ti9" value={{{ =[[$ORDER$]has[qty_item09]get[qty_item09]else[0]] =[[$ORDER$]has[unit_item09]get[unit_item09]else[0]]  +[product[]] }}}>
+
+<$set name="ti10" value={{{ =[[$ORDER$]has[qty_item10]get[qty_item10]else[0]] =[[$ORDER$]has[unit_item10]get[unit_item10]else[0]]  +[product[]] }}}>
+
+<$set name="ti11" value={{{ =[[$ORDER$]has[qty_item11]get[qty_item11]else[0]] =[[$ORDER$]has[unit_item11]get[unit_item11]else[0]]  +[product[]] }}}>
+
+<$set name="ti12" value={{{ =[[$ORDER$]has[qty_item12]get[qty_item12]else[0]] =[[$ORDER$]has[unit_item12]get[unit_item12]else[0]]  +[product[]] }}}>
+
+<$set name="ti13" value={{{ =[[$ORDER$]has[qty_item13]get[qty_item13]else[0]] =[[$ORDER$]has[unit_item13]get[unit_item13]else[0]]  +[product[]] }}}>
+
+<$set name="ti14" value={{{ =[[$ORDER$]has[qty_item14]get[qty_item14]else[0]] =[[$ORDER$]has[unit_item14]get[unit_item14]else[0]]  +[product[]] }}}>
+
+<$set name="ti15" value={{{ =[[$ORDER$]has[qty_item15]get[qty_item15]else[0]] =[[$ORDER$]has[unit_item15]get[unit_item15]else[0]]  +[product[]] }}}>
+
+<$set name="ti16" value={{{ =[[$ORDER$]has[qty_item16]get[qty_item16]else[0]] =[[$ORDER$]has[unit_item16]get[unit_item16]else[0]]  +[product[]] }}}>
+
+<$set name="ti17" value={{{ =[[$ORDER$]has[qty_item17]get[qty_item17]else[0]] =[[$ORDER$]has[unit_item17]get[unit_item17]else[0]]  +[product[]] }}}>
+
+<$set name="ti18" value={{{ =[[$ORDER$]has[qty_item18]get[qty_item18]else[0]] =[[$ORDER$]has[unit_item18]get[unit_item18]else[0]]  +[product[]] }}}>
+
+<$set name="ti19" value={{{ =[[$ORDER$]has[qty_item19]get[qty_item19]else[0]] =[[$ORDER$]has[unit_item19]get[unit_item19]else[0]]  +[product[]] }}}>
+
+<$set name="ti20" value={{{ =[[$ORDER$]has[qty_item20]get[qty_item20]else[0]] =[[$ORDER$]has[unit_item20]get[unit_item20]else[0]]  +[product[]] }}}>
+
+<$set name="subtot" value={{{ =[<ti1>] =[<ti2>] =[<ti3>] =[<ti4>] =[<ti5>] =[<ti6>] =[<ti7>] =[<ti8>] =[<ti9>] =[<ti10>]  =[<ti11>]  =[<ti12>]  =[<ti13>]  =[<ti14>]  =[<ti15>]  =[<ti16>]  =[<ti17>]  =[<ti18>]  =[<ti19>]  =[<ti20>] +[sum[]] }}}>
+
+<$text text={{{ =[<subtot>] +[multiply[$RATE$]fixed[2]] }}} />
+
+</$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set>
+\end
+
+\define gettotal(ORDER, RATE)
+<$set name="ti1" value={{{ =[[$ORDER$]has[qty_item01]get[qty_item01]else[0]] =[[$ORDER$]has[unit_item01]get[unit_item01]else[0]]  +[product[]] }}}>
+
+<$set name="ti2" value={{{ =[[$ORDER$]has[qty_item02]get[qty_item02]else[0]] =[[$ORDER$]has[unit_item02]get[unit_item02]else[0]]  +[product[]] }}}>
+
+<$set name="ti3" value={{{ =[[$ORDER$]has[qty_item03]get[qty_item03]else[0]] =[[$ORDER$]has[unit_item03]get[unit_item03]else[0]]  +[product[]] }}}>
+
+<$set name="ti4" value={{{ =[[$ORDER$]has[qty_item04]get[qty_item04]else[0]] =[[$ORDER$]has[unit_item04]get[unit_item04]else[0]]  +[product[]] }}}>
+
+<$set name="ti5" value={{{ =[[$ORDER$]has[qty_item05]get[qty_item05]else[0]] =[[$ORDER$]has[unit_item05]get[unit_item05]else[0]]  +[product[]] }}}>
+
+<$set name="ti6" value={{{ =[[$ORDER$]has[qty_item06]get[qty_item06]else[0]] =[[$ORDER$]has[unit_item06]get[unit_item06]else[0]]  +[product[]] }}}>
+
+<$set name="ti7" value={{{ =[[$ORDER$]has[qty_item07]get[qty_item07]else[0]] =[[$ORDER$]has[unit_item07]get[unit_item07]else[0]] +[product[]] }}}>
+
+<$set name="ti8" value={{{ =[[$ORDER$]has[qty_item08]get[qty_item08]else[0]] =[[$ORDER$]has[unit_item08]get[unit_item08]else[0]]  +[product[]] }}}>
+
+<$set name="ti9" value={{{ =[[$ORDER$]has[qty_item09]get[qty_item09]else[0]] =[[$ORDER$]has[unit_item09]get[unit_item09]else[0]]  +[product[]] }}}>
+
+<$set name="ti10" value={{{ =[[$ORDER$]has[qty_item10]get[qty_item10]else[0]] =[[$ORDER$]has[unit_item10]get[unit_item10]else[0]]  +[product[]] }}}>
+
+<$set name="ti11" value={{{ =[[$ORDER$]has[qty_item11]get[qty_item11]else[0]] =[[$ORDER$]has[unit_item11]get[unit_item11]else[0]]  +[product[]] }}}>
+
+<$set name="ti12" value={{{ =[[$ORDER$]has[qty_item12]get[qty_item12]else[0]] =[[$ORDER$]has[unit_item12]get[unit_item12]else[0]]  +[product[]] }}}>
+
+<$set name="ti13" value={{{ =[[$ORDER$]has[qty_item13]get[qty_item13]else[0]] =[[$ORDER$]has[unit_item13]get[unit_item13]else[0]]  +[product[]] }}}>
+
+<$set name="ti14" value={{{ =[[$ORDER$]has[qty_item14]get[qty_item14]else[0]] =[[$ORDER$]has[unit_item14]get[unit_item14]else[0]]  +[product[]] }}}>
+
+<$set name="ti15" value={{{ =[[$ORDER$]has[qty_item15]get[qty_item15]else[0]] =[[$ORDER$]has[unit_item15]get[unit_item15]else[0]]  +[product[]] }}}>
+
+<$set name="ti16" value={{{ =[[$ORDER$]has[qty_item16]get[qty_item16]else[0]] =[[$ORDER$]has[unit_item16]get[unit_item16]else[0]]  +[product[]] }}}>
+
+<$set name="ti17" value={{{ =[[$ORDER$]has[qty_item17]get[qty_item17]else[0]] =[[$ORDER$]has[unit_item17]get[unit_item17]else[0]]  +[product[]] }}}>
+
+<$set name="ti18" value={{{ =[[$ORDER$]has[qty_item18]get[qty_item18]else[0]] =[[$ORDER$]has[unit_item18]get[unit_item18]else[0]]  +[product[]] }}}>
+
+<$set name="ti19" value={{{ =[[$ORDER$]has[qty_item19]get[qty_item19]else[0]] =[[$ORDER$]has[unit_item19]get[unit_item19]else[0]]  +[product[]] }}}>
+
+<$set name="ti20" value={{{ =[[$ORDER$]has[qty_item20]get[qty_item20]else[0]] =[[$ORDER$]has[unit_item20]get[unit_item20]else[0]]  +[product[]] }}}>
+
+
+<$set name="subtot" value={{{ =[<ti1>] =[<ti2>] =[<ti3>] =[<ti4>] =[<ti5>] =[<ti6>] =[<ti7>] =[<ti8>] =[<ti9>] =[<ti10>]  =[<ti11>]  =[<ti12>]  =[<ti13>]  =[<ti14>]  =[<ti15>]  =[<ti16>]  =[<ti17>]  =[<ti18>]  =[<ti19>]  =[<ti20>] +[sum[]fixed[2]] }}}>
+
+<$set name="tax" value={{{ =[<subtot>] +[multiply[$RATE$]fixed[2]] }}} >
+
+<$text text={{{ =[<subtot>] =[<tax>] +[sum[]fixed[2]] }}} />
+
+</$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set>
+\end
+
+\define balance($ORDER$, $RATE$)
+<$set name="ti1" value={{{ =[[$ORDER$]has[qty_item01]get[qty_item01]else[0]] =[[$ORDER$]has[unit_item01]get[unit_item01]else[0]]  +[product[]] }}}>
+
+<$set name="ti2" value={{{ =[[$ORDER$]has[qty_item02]get[qty_item02]else[0]] =[[$ORDER$]has[unit_item02]get[unit_item02]else[0]]  +[product[]] }}}>
+
+<$set name="ti3" value={{{ =[[$ORDER$]has[qty_item03]get[qty_item03]else[0]] =[[$ORDER$]has[unit_item03]get[unit_item03]else[0]]  +[product[]] }}}>
+
+<$set name="ti4" value={{{ =[[$ORDER$]has[qty_item04]get[qty_item04]else[0]] =[[$ORDER$]has[unit_item04]get[unit_item04]else[0]]  +[product[]] }}}>
+
+<$set name="ti5" value={{{ =[[$ORDER$]has[qty_item05]get[qty_item05]else[0]] =[[$ORDER$]has[unit_item05]get[unit_item05]else[0]]  +[product[]] }}}>
+
+<$set name="ti6" value={{{ =[[$ORDER$]has[qty_item06]get[qty_item06]else[0]] =[[$ORDER$]has[unit_item06]get[unit_item06]else[0]]  +[product[]] }}}>
+
+<$set name="ti7" value={{{ =[[$ORDER$]has[qty_item07]get[qty_item07]else[0]] =[[$ORDER$]has[unit_item07]get[unit_item07]else[0]] +[product[]] }}}>
+
+<$set name="ti8" value={{{ =[[$ORDER$]has[qty_item08]get[qty_item08]else[0]] =[[$ORDER$]has[unit_item08]get[unit_item08]else[0]]  +[product[]] }}}>
+
+<$set name="ti9" value={{{ =[[$ORDER$]has[qty_item09]get[qty_item09]else[0]] =[[$ORDER$]has[unit_item09]get[unit_item09]else[0]]  +[product[]] }}}>
+
+<$set name="ti10" value={{{ =[[$ORDER$]has[qty_item10]get[qty_item10]else[0]] =[[$ORDER$]has[unit_item10]get[unit_item10]else[0]]  +[product[]] }}}>
+
+<$set name="ti11" value={{{ =[[$ORDER$]has[qty_item11]get[qty_item11]else[0]] =[[$ORDER$]has[unit_item11]get[unit_item11]else[0]]  +[product[]] }}}>
+
+<$set name="ti12" value={{{ =[[$ORDER$]has[qty_item12]get[qty_item12]else[0]] =[[$ORDER$]has[unit_item12]get[unit_item12]else[0]]  +[product[]] }}}>
+
+<$set name="ti13" value={{{ =[[$ORDER$]has[qty_item13]get[qty_item13]else[0]] =[[$ORDER$]has[unit_item13]get[unit_item13]else[0]]  +[product[]] }}}>
+
+<$set name="ti14" value={{{ =[[$ORDER$]has[qty_item14]get[qty_item14]else[0]] =[[$ORDER$]has[unit_item14]get[unit_item14]else[0]]  +[product[]] }}}>
+
+<$set name="ti15" value={{{ =[[$ORDER$]has[qty_item15]get[qty_item15]else[0]] =[[$ORDER$]has[unit_item15]get[unit_item15]else[0]]  +[product[]] }}}>
+
+<$set name="ti16" value={{{ =[[$ORDER$]has[qty_item16]get[qty_item16]else[0]] =[[$ORDER$]has[unit_item16]get[unit_item16]else[0]]  +[product[]] }}}>
+
+<$set name="ti17" value={{{ =[[$ORDER$]has[qty_item17]get[qty_item17]else[0]] =[[$ORDER$]has[unit_item17]get[unit_item17]else[0]]  +[product[]] }}}>
+
+<$set name="ti18" value={{{ =[[$ORDER$]has[qty_item18]get[qty_item18]else[0]] =[[$ORDER$]has[unit_item18]get[unit_item18]else[0]]  +[product[]] }}}>
+
+<$set name="ti19" value={{{ =[[$ORDER$]has[qty_item19]get[qty_item19]else[0]] =[[$ORDER$]has[unit_item19]get[unit_item19]else[0]]  +[product[]] }}}>
+
+<$set name="ti20" value={{{ =[[$ORDER$]has[qty_item20]get[qty_item20]else[0]] =[[$ORDER$]has[unit_item20]get[unit_item20]else[0]]  +[product[]] }}}>
+
+
+<$set name="subtot" value={{{ =[<ti1>] =[<ti2>] =[<ti3>] =[<ti4>] =[<ti5>] =[<ti6>] =[<ti7>] =[<ti8>] =[<ti9>] =[<ti10>]  =[<ti11>]  =[<ti12>]  =[<ti13>]  =[<ti14>]  =[<ti15>]  =[<ti16>]  =[<ti17>]  =[<ti18>]  =[<ti19>]  =[<ti20>] +[sum[]] }}}>
+
+<$set name="tax" value={{{ =[<subtot>] +[multiply[$RATE$]fixed[2]] }}} >
+
+<$set name="tot" value={{{ =[<subtot>] =[<tax>] +[sum[]fixed[2]] }}} >
+
+<$set name="py1" value={{$ORDER$!!payment1}}>
+
+<$set name="py2" value={{$ORDER$!!payment2}}>
+
+<$set name="py3" value={{$ORDER$!!payment3}}>
+
+<$text text={{{ =[<tot>] =[<py1>] =[<py2>] =[<py3>] +[sum[]fixed[2]] }}}/>
+
+</$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set>
+\end

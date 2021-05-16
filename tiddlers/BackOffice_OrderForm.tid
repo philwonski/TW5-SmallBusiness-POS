@@ -1,0 +1,194 @@
+created: 20200806234123858
+modified: 20210516144945686
+tags: BackOffice View
+tax: 
+title: BackOffice/OrderForm
+type: text/vnd.tiddlywiki
+
+\define totalsbox()
+<b>Subtotal: </b><$macrocall $name="getsubtotal" ORDER="$:/BackOffice/TempOrder20001"/>
+<br>
+<b>Tax:</b> <$macrocall $name="gettax" ORDER="$:/BackOffice/TempOrder20001" RATE="$(currate)$" /> 
+<br>
+<b>Total: </b><$macrocall $name="gettotal" ORDER="$:/BackOffice/TempOrder20001" RATE="$(currate)$" />  
+<br>
+<$macrocall $name="listpayments" ORDER="$:/BackOffice/TempOrder20001"  /> 
+<$macrocall $name="addpayment" ORDER="$:/BackOffice/TempOrder20001"  /> 
+<br><br>
+<b>BALANCE: </b><$macrocall $name="balance" ORDER="$:/BackOffice/TempOrder20001" RATE="$(currate)$" />
+\end
+
+\define head()
+<div style="margin-bottom: -8px;">
+<div class="formHeader" style="width: 20%; float: left; padding: 1.5%; text-align: left;"><br><b>{{CompanyInfo!!company_phone}} phone</b></div>
+
+<div class="formHeader" style="width: 60%; float: left; padding: 1.5%; text-align: center; font-size: 115%;"><b>{{CompanyInfo!!company_name}}<br>{{CompanyInfo!!company_address}}, {{CompanyInfo!!company_address2}}</b></div>
+
+<div class="formHeader" style="width: 20%; float: left; padding: 1.5%; text-align: right;"><b>Order <$view tiddler="$:/BackOffice/TempOrder20001" field="ordernumber"/> <br>{{CompanyInfo!!company_fax}} fax</b></div>
+
+</div>
+<div class="floatkill"></div>
+<hr class="thicker_line" >
+\end
+
+\define thisTid()
+<<head>>
+<div class="editorderinfo">
+
+<b><i>Order Info</i></b>
+<br>
+Clerk: <$edit-text class="sscellu" size="20" tiddler="$:/BackOffice/TempOrder20001" field="clerkname" placeholder="clerkname" /><br>
+Order #: <$edit-text class="sscellu" size="18" tiddler="$:/BackOffice/TempOrder20001" field="ordernumber" placeholder="ordernumber"/><br>
+Date: <$edit-text class="sscellu" size="20" tiddler="$:/BackOffice/TempOrder20001" field="orderdate" placeholder="orderdate"/>
+<br>
+</div>
+
+<div style="width: 100%;">
+
+<div style="width=45%; float: left;">
+//Account//
+
+<table border="0" class="silent" >
+<tr>
+    <td colspan="2">NAME <$edit-text class="sscellu" size="38" tiddler="$:/BackOffice/TempOrder20001" field="name" /></td>
+  </tr>
+
+  <tr>
+    <td colspan="2">ADDRESS <$edit-text class="sscellu" size="35" tiddler="$:/BackOffice/TempOrder20001" field="address" /></td>
+  </tr>
+
+  <tr>
+    <td colspan="2"><$edit-text class="sscellu" size="43" tiddler="$:/BackOffice/TempOrder20001" field="address2" /></td>
+  </tr>
+
+  <tr>
+    <td>PHONE<$edit-text class="sscellu" size="12" tiddler="$:/BackOffice/TempOrder20001" field="phone" /></td>
+     <td>Alt Phone<$edit-text class="sscellu" size="12" tiddler="$:/BackOffice/TempOrder20001" field="phone2" /></td>
+  </tr>
+
+  <tr>
+       <td colspan="2">E-MAIL<$edit-text class="sscellu" size="34" tiddler="$:/BackOffice/TempOrder20001" field="email" /></td>
+  </tr>
+</table> 
+</div>
+
+<div style="width:45%; float: right; text-align:left;">
+//Order Notes//
+<br>
+<$edit-text class="sscellu" size="30" tiddler="$:/BackOffice/TempOrder20001" field="ordernotes"/><br>
+<$edit-text class="sscellu" size="30" tiddler="$:/BackOffice/TempOrder20001" field="ordernotes2"/><br>
+<$edit-text class="sscellu" size="30" tiddler="$:/BackOffice/TempOrder20001" field="ordernotes3"/><br>
+<$edit-text class="sscellu" size="30" tiddler="$:/BackOffice/TempOrder20001" field="ordernotes4"/><br>
+</div>
+
+</div>
+<div style="float: none; clear: both; margin-bottom: 25px;"></div>
+
+<hr>
+
+Items
+
+<table class="orderformitems" style="width:100%">
+ <colgroup>
+    <col style="width:3%">
+    <col style="width:150px">
+       <col style="width:180px">
+    <col style="width:33%">
+    <col style="width:70px">
+    <col style="width:70px">
+   <col style="width:8%">
+     <col style="width:8%">
+  </colgroup>  
+<thead>
+  <tr>
+    <th>{{OrderFormColumns!!1}}</th>
+    <th>{{OrderFormColumns!!2}}</th>
+    <th>{{OrderFormColumns!!3}} </th> 
+    <th>{{OrderFormColumns!!4}} <<required>></th>
+    <th>{{OrderFormColumns!!5}}</th>
+    <th>{{OrderFormColumns!!6}}</th> 
+    <th>{{OrderFormColumns!!7}}</th>
+    <th>{{OrderFormColumns!!8}}</th>
+  </tr>
+</thead>
+<tbody>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="01"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="02"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="03"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="04"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="05"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="06"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="07"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="08"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="09"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="10"/>
+</tbody>
+</table>
+
+
+
+<$reveal type="nomatch" state="$:/BackOffice/TempOrder20001!!editcount" text="20">
+
+<$button class="moreitemsbutton" set="$:/BackOffice/TempOrder20001!!editcount" setTo="20">Add More Items + </$button>
+
+</$reveal>
+<$reveal type="match" state="$:/BackOffice/TempOrder20001!!editcount" text="20">
+
+<$button class="moreitemsbutton" set="$:/BackOffice/TempOrder20001!!editcount" setTo="">Hide Extra Items</$button>
+
+<i>Add more items</i><br>
+<table class="orderformitems" style="width:100%">
+ <colgroup>
+    <col style="width:3%">
+    <col style="width:150px">
+       <col style="width:180px">
+    <col style="width:33%">
+    <col style="width:70px">
+    <col style="width:70px">
+   <col style="width:8%">
+     <col style="width:8%">
+  </colgroup>  
+<thead>
+    <tr>
+    <th>{{OrderFormColumns!!1}}</th>
+    <th>{{OrderFormColumns!!2}}</th>
+    <th>{{OrderFormColumns!!3}} </th> 
+    <th>{{OrderFormColumns!!4}} <<required>></th>
+    <th>{{OrderFormColumns!!5}}</th>
+    <th>{{OrderFormColumns!!6}}</th> 
+    <th>{{OrderFormColumns!!7}}</th>
+    <th>{{OrderFormColumns!!8}}</th>
+  </tr>
+</thead>
+<tbody>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="11"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="12"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="13"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="14"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="15"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="16"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="17"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="18"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="19"/>
+<$macrocall $name="itemsEditRow" ORDER="$:/BackOffice/TempOrder20001" ROW="20"/>
+</tbody>
+</table>
+
+</$reveal>
+
+<div style="width: 30%; float: right; padding-left: 2%;">
+<$vars currate={{$:/BackOffice/TempOrder20001!!tax}}>
+<<totalsbox>>
+</$vars>
+<div style="font-size: 80%; margin-top: 16px;">
+<$checkbox tiddler="$:/BackOffice/TempOrder20001" field="tax" checked="0" unchecked={{Both/Settings/storage!!taxrate}} default={{Both/Settings/storage!!taxrate}} > Tax Exempt</$checkbox></div>
+</div>
+<div style="width: 65%; float: left; border-top: 0px solid grey; padding:1.5%;">
+<b>{{Both/Settings/storage}}</b>
+</div>
+<div style="float:none;clear:both;"/>
+\end
+
+<$vars corder=<<corder>> >
+<<thisTid>>
+</$vars>

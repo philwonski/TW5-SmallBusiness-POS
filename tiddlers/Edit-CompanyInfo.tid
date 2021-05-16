@@ -1,0 +1,11 @@
+created: 20210516140751010
+modified: 20210516140944792
+tags: 
+title: Edit-CompanyInfo
+type: text/vnd.tiddlywiki
+
+Name:    <$edit-text tiddler="CompanyInfo" field="company_name" tag="input" size="40"/> <br>
+Address 1:   <$edit-text tiddler="CompanyInfo" field="company_address" tag="input" size="40"/> <br>
+Address 2:   <$edit-text tiddler="CompanyInfo" field="company_address2" tag="input" size="40"/> <br>
+Phone:   <$edit-text tiddler="CompanyInfo" field="company_phone" tag="input" size="40"/> <br>
+Fax:   <$edit-text tiddler="CompanyInfo" field="company_fax" tag="input" size="40"/> <br>

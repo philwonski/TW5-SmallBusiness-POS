@@ -1,0 +1,8 @@
+created: 20200702004144920
+modified: 20200704150926380
+revision: 0
+tags: BackOffice List
+title: Backoffice/OrdersView1
+type: text/vnd.tiddlywiki
+
+<$list filter="[tag[Order]]">{{!!title}}, {{!!ordernumber}}, {{!!orderdate}}, {{!!fn}}<br><br></$list>

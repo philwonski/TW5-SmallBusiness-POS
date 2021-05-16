@@ -1,0 +1,15 @@
+created: 20200809144639594
+modified: 20200809183219523
+revision: 0
+tags: Button FrontDesk
+title: FrontDesk/Button/StartOrder
+type: text/vnd.tiddlywiki
+
+\define actions()
+<$action-setfield $tiddler="FrontDesk/Order/SpecialClose" $field="msg" $value="Discard Draft" /><$action-setfield $tiddler="FrontDesk/Order/DIALOGUEstore" $field="ab" $value="FrontDesk/Order/Dg1a"/>
+<$action-setfield $tiddler="FrontDesk/StartOrder/storage" $field="pastevalue" $value={{FrontDesk/SearchTerm!!term}} />
+<$action-setfield $tiddler="FrontDesk/SearchTerm" $field="term" $value=""/>
+<$action-sendmessage $message="tm-modal" $param="FrontDesk/Order/DIALOGUEshell"/>
+\end
+
+<$button class="startOrderButton"><<actions>>Start Order</$button>

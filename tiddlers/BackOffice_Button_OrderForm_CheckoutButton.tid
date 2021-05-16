@@ -1,0 +1,31 @@
+created: 20200702003734528
+modified: 20200926170436135
+revision: 0
+tags: BackOffice Button
+title: BackOffice/Button/OrderForm/CheckoutButton
+type: text/vnd.tiddlywiki
+
+\define Create()
+<$action-setfield $tiddler="$:/BackOffice/TempOrder20001" stage="1"/>
+<$action-createtiddler $basetitle=<<now order_bo_YYYY_0MM_DD_0hh_0mm_0ss>> $template="$:/BackOffice/TempOrder20001"/>
+\end
+
+\define SaveDraft()
+<$action-setfield $tiddler="$:/BackOffice/TempOrder20001" stage="0"/>
+<$action-createtiddler $basetitle=<<now order_bo_YYYY_0MM_DD_0hh_0mm_0ss>> $template="$:/BackOffice/TempOrder20001"/>
+\end
+
+\define clearActions()
+<$action-setfield $tiddler="BackOffice/Order/SpecialClose" $field="msg" $value="close" />
+<$action-setfield $tiddler="$:/BackOffice/TempOrder20001" tax={{Both/Settings/storage!!taxrate}} ordernotes="" vendor_item02="" vendor_item01="" unit_item02="" unit_item01="" total="" subtotal="" stage="" qty_item02="" qty_item01="" phone2="" phone1="" phone="" payment3="" payment2="" payment1="" pa_yment3check="" pa_yment2check="" pa_yment1check="" p_ayment3type="" p_ayment2type="" p_ayment1type="" ordernumber="" ordernotes="" orderdate="" num_item02="" num_item01="" name="" modified="" maxitems="" ln="" function_item02="" function_item01="" fn="" extprice_item1="" email="" desc_item02="" desc_item01="" color_item02="" color_item01="" clerkname="" address="" address2="" nowhere="" qty_item03="" vendor_item03="" num_item03="" desc_item03="" color_item03="" function_item03="" unit_item03="" qty_item04="" vendor_item04="" num_item04="" desc_item04="" color_item04="" function_item04="" unit_item04="" qty_item05="" vendor_item05="" num_item05="" desc_item05="" color_item05="" function_item05="" unit_item05="" qty_item06="" vendor_item06="" num_item06="" desc_item06="" color_item06="" function_item06="" unit_item06="" qty_item07="" vendor_item07="" num_item07="" desc_item07="" color_item07="" function_item07="" unit_item07="" qty_item08="" vendor_item08="" num_item08="" desc_item08="" color_item08="" function_item08="" unit_item08="" qty_item09="" vendor_item09="" num_item09="" desc_item09="" color_item09="" function_item09="" unit_item09="" qty_item10="" vendor_item10="" num_item10="" desc_item10="" color_item10="" function_item10="" unit_item10="" qty_item11="" vendor_item11="" num_item11="" desc_item11="" color_item11="" function_item11="" unit_item11="" qty_item12="" vendor_item12="" num_item12="" desc_item12="" color_item12="" function_item12="" unit_item12="" qty_item13="" vendor_item13="" num_item13="" desc_item13="" color_item13="" function_item13="" unit_item13="" qty_item14="" vendor_item14="" num_item14="" desc_item14="" color_item14="" function_item14="" unit_item14="" qty_item15="" vendor_item15="" num_item15="" desc_item15="" color_item15="" function_item15="" unit_item15="" qty_item16="" vendor_item16="" num_item16="" desc_item16="" color_item16="" function_item16="" unit_item16="" qty_item17="" vendor_item17="" num_item17="" desc_item17="" color_item17="" function_item17="" unit_item17="" qty_item18="" vendor_item18="" num_item18="" desc_item18="" color_item18="" function_item18="" unit_item18="" qty_item19="" vendor_item19="" num_item19="" desc_item19="" color_item19="" function_item19="" unit_item19="" qty_item20="" vendor_item20="" num_item20="" desc_item20="" color_item20="" function_item20="" unit_item20="" />
+<$action-setfield $tiddler="BackOffice/css" itemsheight="100" /><$action-setfield $tiddler="BackOffice/Order/DIALOGUEstore" $field="ab" $value="BackOffice/Order/Dg3"/>
+\end
+<div style="text-align: left;">
+<$button class="startOrderButton" style="margin-left: 0px;"><<Create>><<clearActions>>
+Complete Order
+</$button>
+<br><br>
+<$button style="background: transparent; border: none; color: grey; cursor: pointer;"><<SaveDraft>><<clearActions>>
+Save Draft
+</$button>
+</div>

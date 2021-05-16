@@ -1,0 +1,11 @@
+created: 20200704194026617
+modified: 20200709182443057
+revision: 0
+tags: BackOffice Button
+title: Modal/button/editOrder
+type: text/vnd.tiddlywiki
+
+<$button>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/EditTemplate" corder="order_ 2"/>
+Click me!
+</$button>

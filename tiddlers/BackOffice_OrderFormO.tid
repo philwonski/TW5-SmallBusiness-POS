@@ -1,0 +1,93 @@
+created: 20200702002503843
+modified: 20200806234458351
+revision: 0
+tags: BackOffice View
+title: BackOffice/OrderFormO
+type: text/vnd.tiddlywiki
+
+\define moreitems()
+<$button class="textbutton"><$action-setfield $tiddler="BackOffice/css" itemsheight={{{ [[BackOffice/css]get[itemsheight]] +[add[500]] }}} />Add Item</$button>
+\end
+
+\define totalsbox()
+Subtotal: <<getsubtotal $:/BackOffice/TempOrder20001>>
+<br>
+Tax: <<gettax $:/BackOffice/TempOrder20001 $(currate)$>>
+<br>
+Total: <<gettotal $:/BackOffice/TempOrder20001 $(currate)$>>
+<br>
+<<listpayments $:/BackOffice/TempOrder20001>>
+<br>
+<<addpayment $:/BackOffice/TempOrder20001>>
+<br>
+Balance: <<balance $:/BackOffice/TempOrder20001 $(currate)$>>
+\end
+
+Account and Order
+
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="clerkname" placeholder="clerkname" />
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="ordernumber" placeholder="ordernumber"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="orderdate" placeholder="orderdate"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="name" placeholder="name"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="address" placeholder="address"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="phone" placeholder="phone"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="phone2" placeholder="phone2"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="email" placeholder="email"/>
+
+<hr>
+
+Items
+
+<div class="itemsblock_BOOF">
+//1//
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="qty_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="vendor_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="num_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="desc_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="color_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="function_item01"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="unit_item01"/>
+<br>
+<<getextprice $:/BackOffice/TempOrder20001 01>>
+<br>
+
+//2//
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="qty_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="vendor_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="num_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="desc_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="color_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="function_item02"/>
+<br>
+<$edit-text tiddler="$:/BackOffice/TempOrder20001" field="unit_item02"/>
+<br>
+<<getextprice $:/BackOffice/TempOrder20001 02>>
+<br>
+</div>
+
+<<moreitems>>
+
+<hr>
+<$vars currate={{$:/BackOffice/TempOrder20001!!tax}}>
+<<totalsbox>>
+</$vars>

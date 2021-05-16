@@ -1,0 +1,105 @@
+created: 20200807123127200
+modified: 20210516143405302
+tags: 
+title: BackOffice/OrderBook
+type: text/vnd.tiddlywiki
+
+\define draft()
+<$reveal type="nomatch" state="MyState/view/draftBACKOFFICE" text="show">
+
+<$button style="background-color: transparent; border: none;" set="MyState/view/draftBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##0}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/draftBACKOFFICE" text="show">
+
+<$button style="background-color: transparent; border: none;" set="MyState/view/draftBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##0}}</$button>
+
+<$list filter="[tag[Order]stage[0]!sort[modified]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+\define pending()
+<$reveal type="nomatch" state="MyState/view/pendingBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/pendingBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##1}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/pendingBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/pendingBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##1}}</$button>
+
+<$list filter="[tag[Order]stage[1]!sort[modified]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+\define sent()
+<$reveal type="nomatch" state="MyState/view/sentBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/sentBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##2}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/sentBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/sentBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##2}}</$button>
+
+<$list filter="[tag[Order]stage[2]!sort[modified]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+\define confirmed()
+<$reveal type="nomatch" state="MyState/view/confirmedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/confirmedBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##3}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/confirmedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/confirmedBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##3}}</$button>
+
+<$list filter="[tag[Order]stage[3]!sort[modified]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+\define received()
+<$reveal type="nomatch" state="MyState/view/receivedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/receivedBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##4}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/receivedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/receivedBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##4}}</$button>
+
+<$list filter="[tag[Order]stage[4]!sort[modified]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+\define installed()
+<$reveal type="nomatch" state="MyState/view/installedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/installedBACKOFFICE" setTo="show">{{$:/core/images/down-arrow}} {{Both/Stages##5}}</$button>
+
+</$reveal>
+<$reveal type="match" state="MyState/view/installedBACKOFFICE" text="show">
+
+<$button class="accordian" set="MyState/view/installedBACKOFFICE" setTo="hide">{{$:/core/images/up-arrow}} {{Both/Stages##5}}</$button>
+
+<$list filter="[tag[Order]stage[5]!sort[modified]limit[60]] -$:/BackOffice/TempOrder20001" template="BackOffice/SearchResults/Template" />
+</$reveal>
+\end
+
+
+
+<<draft>>
+
+<<pending>>
+
+<<sent>>
+
+<<confirmed>>
+
+<<received>>
+
+<<installed>>
+
+<div style="float: none; kill:both;"></div>

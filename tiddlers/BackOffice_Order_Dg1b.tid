@@ -1,0 +1,28 @@
+created: 20200702222225381
+modified: 20200702223711056
+revision: 0
+tags: BackOffice
+title: BackOffice/Order/Dg1b
+type: text/vnd.tiddlywiki
+
+//Searching  // <b>{{BackOffice/StartTermStored!!term}} </b>//revealed the following results://
+
+xxx [create order with this account info]
+
+yyy [create order with this account info]
+
+[start a fresh account]
+
+>v
+<hr>
+
+Paste <b>{{BackOffice/SearchTermStored!!term}}</b> into the 
+
+*name
+*phone number
+*address
+*order number
+
+<hr>
+
+[Begin Order]

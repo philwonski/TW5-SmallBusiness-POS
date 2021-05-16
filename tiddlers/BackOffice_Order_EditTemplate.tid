@@ -1,0 +1,188 @@
+caption: Edit Order
+created: 20200704192053886
+modified: 20210516144929687
+tags: BackOffice OrderTemplate
+title: BackOffice/Order/EditTemplate
+type: text/vnd.tiddlywiki
+
+\define moreitems()
+<$button class="textbutton"><$action-setfield $tiddler="BackOffice/css" itemsheight={{{ [[BackOffice/css]get[itemsheight]] +[add[500]] }}} />Add Item</$button>
+\end
+
+\define totalsbox()
+Subtotal: <$macrocall $name="getsubtotal" ORDER="$(corder)$"/>
+<br>
+Tax: <$macrocall $name="gettax" ORDER="$(corder)$" RATE="$(currate)$" /> 
+<br>
+Total: <$macrocall $name="gettotal" ORDER="$(corder)$" RATE="$(currate)$" />  
+<br>
+<$macrocall $name="listpayments" ORDER="$(corder)$"  /> 
+<$macrocall $name="addpayment" ORDER="$(corder)$"  /> 
+<br><br>
+Balance: <$macrocall $name="balance" ORDER="$(corder)$" RATE="$(currate)$" />
+\end
+
+\define thisTid()
+<div class="editorderinfo">
+
+<b><i>Order Info</i></b>
+<br>
+Clerk: <$edit-text class="sscellu" size="20" tiddler="$(corder)$" field="clerkname" placeholder="clerkname" /><br>
+Order #: <$edit-text class="sscellu" size="18" tiddler="$(corder)$" field="ordernumber" placeholder="ordernumber"/><br>
+Date: <$edit-text class="sscellu" size="20" tiddler="$(corder)$" field="orderdate" placeholder="orderdate"/>
+<br>
+</div>
+
+<div style="width: 100%;">
+
+<div style="width=45%; float: left;">
+//Account//
+
+<table border="0" class="silent" >
+<tr>
+    <td colspan="2">NAME <$edit-text class="sscellu" size="38" tiddler="$(corder)$" field="name" placeholder="name"/></td>
+  </tr>
+
+  <tr>
+    <td colspan="2">ADDRESS <$edit-text class="sscellu" size="35" tiddler="$(corder)$" field="address" placeholder="address"/></td>
+  </tr>
+
+  <tr>
+    <td colspan="2"><$edit-text class="sscellu" size="43" tiddler="$(corder)$" field="address2" placeholder="address2"/></td>
+  </tr>
+
+  <tr>
+    <td>PHONE<$edit-text class="sscellu" size="12" tiddler="$(corder)$" field="phone" placeholder="phone"/></td>
+     <td>Alt Phone<$edit-text class="sscellu" size="12" tiddler="$(corder)$" field="phone2" placeholder="alt phone"/></td>
+  </tr>
+
+  <tr>
+       <td colspan="2">E-MAIL<$edit-text class="sscellu" size="34" tiddler="$(corder)$" field="email" placeholder="email"/></td>
+  </tr>
+</table> 
+</div>
+
+<div style="width=45%; float: right;">
+//Order Notes//
+<br>
+<$edit-text class="sscellu" size="30" tiddler="$(corder)$" field="ordernotes" /><br>
+<$edit-text class="sscellu" size="30" tiddler="$(corder)$" field="ordernotes2"/><br>
+<$edit-text class="sscellu" size="30" tiddler="$(corder)$" field="ordernotes3"/><br>
+<$edit-text class="sscellu" size="30" tiddler="$(corder)$" field="ordernotes4"/><br>
+</div>
+
+</div>
+<div style="float: none; clear: both; margin-bottom: 25px;"></div>
+
+<hr>
+
+Items
+
+<table class="orderformitems" style="width:100%">
+ <colgroup>
+    <col style="width:3%">
+    <col style="width:150px">
+       <col style="width:180px">
+    <col style="width:33%">
+    <col style="width:70px">
+    <col style="width:70px">
+   <col style="width:8%">
+     <col style="width:8%">
+  </colgroup>  
+<thead>
+  <tr>
+    <th>{{OrderFormColumns!!1}}</th>
+    <th>{{OrderFormColumns!!2}}</th>
+    <th>{{OrderFormColumns!!3}} </th> 
+    <th>{{OrderFormColumns!!4}} <<required>></th>
+    <th>{{OrderFormColumns!!5}}</th>
+    <th>{{OrderFormColumns!!6}}</th> 
+    <th>{{OrderFormColumns!!7}}</th>
+    <th>{{OrderFormColumns!!8}}</th>
+  </tr>
+</thead>
+<tbody>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="01"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="02"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="03"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="04"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="05"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="06"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="07"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="08"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="09"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="10"/>
+</tbody>
+</table>
+
+
+
+<$reveal type="nomatch" state="$(corder)$!!editcount" text="20">
+
+<$button class="moreitemsbutton" set="$(corder)$!!editcount" setTo="20">Add More Items + </$button>
+
+</$reveal>
+<$reveal type="match" state="$(corder)$!!editcount" text="20">
+
+<$button class="moreitemsbutton" set="$(corder)$!!editcount" setTo="">Hide Extra Items</$button>
+
+<i>Add more items</i><br>
+<table class="orderformitems" style="width:100%">
+ <colgroup>
+    <col style="width:3%">
+    <col style="width:150px">
+       <col style="width:180px">
+    <col style="width:33%">
+    <col style="width:70px">
+    <col style="width:70px">
+   <col style="width:8%">
+     <col style="width:8%">
+  </colgroup>  
+<thead>
+  <tr>
+    <th>{{OrderFormColumns!!1}}</th>
+    <th>{{OrderFormColumns!!2}}</th>
+    <th>{{OrderFormColumns!!3}} </th> 
+    <th>{{OrderFormColumns!!4}} <<required>></th>
+    <th>{{OrderFormColumns!!5}}</th>
+    <th>{{OrderFormColumns!!6}}</th> 
+    <th>{{OrderFormColumns!!7}}</th>
+    <th>{{OrderFormColumns!!8}}</th>
+  </tr>
+</thead>
+<tbody>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="11"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="12"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="13"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="14"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="15"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="16"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="17"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="18"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="19"/>
+<$macrocall $name="itemsEditRow" ORDER="$(corder)$" ROW="20"/>
+</tbody>
+</table>
+
+</$reveal>
+
+<div style="width: 30%; float: right; padding-left: 2%;">
+<$vars currate={{$(corder)$!!tax}}>
+<<totalsbox>>
+</$vars>
+<$macrocall $name="paymenteditor" ORDER="$(corder)$"  />
+</div>
+<div style="width: 65%; float: left; border-top: 1px solid grey; padding:1.5%;">
+Comments:
+<$macrocall $name="listcomments" ORDER="$(corder)$"  />
+<br>
+<$macrocall $name="NEWlistcommentsEDITOR" ORDER="$(corder)$"  />
+<br>
+<$macrocall $name="NEWaddcommentBackOffice" ORDER="$(corder)$"  />
+</div>
+<div style="float:none;clear:both;"/>
+\end
+
+<$vars corder=<<corder>>>
+<<thisTid>>
+</$vars>

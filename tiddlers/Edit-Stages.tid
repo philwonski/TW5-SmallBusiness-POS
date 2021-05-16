@@ -1,0 +1,11 @@
+created: 20210516144454372
+modified: 20210516144609803
+tags: 
+title: Edit-Stages
+type: text/vnd.tiddlywiki
+
+Stage 1:    <$edit-text tiddler="Both/Stages" index="1" tag="input" size="40"/> <br>
+Stage 2:   <$edit-text tiddler="Both/Stages" index="2" tag="input" size="40"/> <br>
+Stage 3:   <$edit-text tiddler="Both/Stages" index="3" tag="input" size="40"/> <br>
+Stage 4:   <$edit-text tiddler="Both/Stages" index="4" tag="input" size="40"/> <br>
+Stage 5:   <$edit-text tiddler="Both/Stages" index="5" tag="input" size="40"/> <br>

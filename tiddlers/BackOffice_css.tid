@@ -1,0 +1,8 @@
+created: 20200710213030810
+itemsheight: 100
+modified: 20210516143839612
+tags: BackOffice $:/tags/Stylesheet
+title: BackOffice/css
+type: text/vnd.tiddlywiki
+
+.itemsblock_BOOF { height: {{!!itemsheight}}px; overflow: hidden; }

@@ -1,0 +1,9 @@
+created: 20200815141756642
+modified: 20200815153410012
+revision: 0
+tags: 
+title: both/serverrefresh
+type: text/vnd.tiddlywiki
+
+<$button>
+<$action-sendmessage $message="tm-server-refresh"/>Server Refresh</$button>

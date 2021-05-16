@@ -1,0 +1,14 @@
+created: 20210516140345091
+modified: 20210516144450817
+tags: 
+title: Edit-OrderForm
+type: text/vnd.tiddlywiki
+
+Column 1:    <$edit-text tiddler="OrderFormColumns" field="1" tag="input" size="40"/> <br>
+Column 2:   <$edit-text tiddler="OrderFormColumns" field="2" tag="input" size="40"/> <br>
+Column 3:   <$edit-text tiddler="OrderFormColumns" field="3" tag="input" size="40"/> <br>
+Column 4:   <$edit-text tiddler="OrderFormColumns" field="4" tag="input" size="40"/> <br>
+Column 5:   <$edit-text tiddler="OrderFormColumns" field="5" tag="input" size="40"/> <br>
+Column 6:   <$edit-text tiddler="OrderFormColumns" field="6" tag="input" size="40"/> <br>
+Column 7:   <$edit-text tiddler="OrderFormColumns" field="7" tag="input" size="40"/> <br>
+Column 8:   <$edit-text tiddler="OrderFormColumns" field="8" tag="input" size="40"/> <br>

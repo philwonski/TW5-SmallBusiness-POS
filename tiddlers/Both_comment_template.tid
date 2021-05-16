@@ -1,0 +1,11 @@
+created: 20201018193541758
+modified: 20201020155552879
+revision: 0
+tags: BackOffice FrontDesk
+title: Both/comment_template
+type: text/vnd.tiddlywiki
+
+<div class="newcomments">
+<span class="nctext"><$transclude mode="block"/></span>
+<span class="ncdate">{{!!writer}} - updated <$view field="modified" format="date" template="DDD DDth MMM YYYY"/></span>
+</div>

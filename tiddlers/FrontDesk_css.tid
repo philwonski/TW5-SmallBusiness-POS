@@ -1,0 +1,9 @@
+created: 20200809142452069
+itemsheight: 100
+modified: 20200926172533302
+revision: 0
+tags: $:/tags/Stylesheet FrontDesk
+title: FrontDesk/css
+type: text/vnd.tiddlywiki
+
+.itemsblock_BOOF { height: {{!!itemsheight}}px; overflow: hidden; }

@@ -1,0 +1,24 @@
+created: 20210516145547416
+modified: 20210516153138906
+tags: 
+title: Instructions
+type: text/vnd.tiddlywiki
+
+<h3>Instructions</h3>
+<hr>
+
+# This app replaces paper-based Order Forms and also allows you to track orders through the fulfillment process. 
+## See the github page for installation instructions. 
+## It works great on a local network using a Raspberry Pi and [[pm2|https://medium.com/@andrew.nease.code/set-up-a-self-booting-node-js-eb56ebd05549]]. 
+## You can also easily secure it on a VPS and access it from anywhere using Cloudflare Argo Tunnels. 
+
+# The app supports up to ''two terminals'', such as a storefront with a cash register/computer up front and a back office computer. 
+
+##All the functionality is the same in the two views. Separating them just allows you to track who is using which terminal and what info is generated there. 
+## Users at the cash register should access the app by visiting myDomainOrIP`/#FrontDesk%2FHome`.
+## Users in the back office should access the app by visiting myDomainOrIP`/#BackOffice%2FHome`.
+
+# The Universal Search bar will search all orders, as well as help you begin an order. 
+## Simply enter some info about the order to begin. 
+## If the customer has never ordered before, simply click the "Start Order" button to begin.
+## If the customer has ordered before, you can click one of their existing orders and, below their contact info, select "New Order with this Account."

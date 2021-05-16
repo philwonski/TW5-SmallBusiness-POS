@@ -1,0 +1,14 @@
+created: 20200704174355068
+modified: 20200811012153825
+revision: 0
+tags: BackOffice Button
+title: BackOffice/Button/StartOrder_LoadForm
+type: text/vnd.tiddlywiki
+
+\define actions()
+<$action-setfield $tiddler="$:/BackOffice/TempOrder20001" $field={{BackOffice/StartOrder/storage!!pasteto}} $value={{BackOffice/StartOrder/storage!!pastevalue}} />
+<$action-setfield $tiddler="$:/BackOffice/TempOrder20001" $field="clerkname" $value={{BackOffice/StartOrder/storage!!clerkname}} />
+<$action-setfield $tiddler="BackOffice/Order/DIALOGUEstore" $field="ab" $value="BackOffice/Order/Dg2"/>
+\end
+
+<$button><<actions>>Proceed to Order Form</$button>

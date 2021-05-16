@@ -1,0 +1,14 @@
+created: 20200809020900578
+modified: 20200809145813918
+revision: 0
+subtitle: User Sign In
+tags: BackOffice View
+title: FrontDesk/ClerkSelect
+type: text/vnd.tiddlywiki
+
+<div style="font-size:130%">Your Name:</div>
+
+<div style="line-height: 30px">
+
+<<clerkselect_front>>
+</div>

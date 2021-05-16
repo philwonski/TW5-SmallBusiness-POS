@@ -1,0 +1,7 @@
+0: Draft
+1: Pending
+2: Order Sent to Vendor
+3: Vendor Confirmed Receipt 
+4: Order Received by {{CompanyInfo!!company_name}}
+5: Order Delivered/Installed
+6: Deleted

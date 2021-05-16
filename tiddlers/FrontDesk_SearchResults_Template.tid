@@ -1,0 +1,15 @@
+created: 20200815013357698
+modified: 20200815013433749
+revision: 0
+tags: FrontDesk
+title: FrontDesk/SearchResults/Template
+type: text/vnd.tiddlywiki
+
+\define table()
+<div style="width: 20%;float:left;"><$button class="searchResults"><$action-sendmessage $message="tm-modal" $param="FrontDesk/Modal/OrderTabs" corder={{!!title}} />{{!!ordernumber}}</$button></div>
+<div style="width: 40%; float:left; "><$button class="searchResults"><$action-sendmessage $message="tm-modal" $param="FrontDesk/Modal/OrderTabs" corder={{!!title}} />{{!!name}}</$button></div>
+<div style="width: 25%; float: left;"><$button class="searchResults"><$action-sendmessage $message="tm-modal" $param="FrontDesk/Modal/OrderTabs" corder={{!!title}} />{{!!phone}}</$button></div>
+<div style="width: 15%; float: left;"><$button class="searchResults"><$action-sendmessage $message="tm-modal" $param="FrontDesk/Modal/OrderTabs" corder={{!!title}} /><$macrocall $name="gettotal" ORDER={{!!title}} RATE={{!!tax}} /></$button></div>
+\end
+<<table>>
+<div style="float:none;clear:both;"/>

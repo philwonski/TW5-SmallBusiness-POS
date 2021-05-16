@@ -1,0 +1,16 @@
+created: 20200710000227967
+modified: 20200710205148974
+revision: 0
+tags: BackOffice View
+title: BackOffice/BrowseOrders
+type: text/vnd.tiddlywiki
+
+All Orders
+<hr>
+<$list filter="[tag[Order]]">{{!!title}}<br></$list>
+
+<br>
+
+Pending Orders
+<hr>
+<$list filter="[tag[Order]stage[1]]">{{!!title}}<br></$list>

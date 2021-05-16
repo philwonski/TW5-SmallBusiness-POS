@@ -1,0 +1,45 @@
+created: 20200702005855751
+modified: 20200814233809933
+revision: 0
+tags: BackOffice List View
+title: BackOffice/SearchResults
+type: text/vnd.tiddlywiki
+
+\define results()
+<$list filter="[tag[Order]!stage[6]] +[search:name{BackOffice/SearchTerm!!term}limit[1]]"> Name</$list><br>
+<$list filter="[tag[Order]!stage[6]] +[search:name{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+\end
+
+\define results2()
+<$list filter="[tag[Order]!stage[6]] +[search:ordernumber{BackOffice/SearchTerm!!term}limit[1]]"> Order Num</$list><br>
+<$list filter="[tag[Order]!stage[6]] +[search:ordernumber{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+\end
+
+\define results3()
+<$list filter="[tag[Order]!stage[6]] +[search:phone{BackOffice/SearchTerm!!term}limit[1]]"> Phone Number</$list><br>
+<$list filter="[tag[Order]!stage[6]] +[search:phone{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+<$list filter="[tag[Order]!stage[6]] +[search:phone2{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+\end
+
+\define results4()
+<$list filter="[tag[Order]!stage[6]] +[search:address{BackOffice/SearchTerm!!term}limit[1]]"> Street Address</$list><br>
+<$list filter="[tag[Order]!stage[6]] +[search:address{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+\end
+
+\define results5()
+<$list filter="[tag[Order]!stage[6]] +[search:vendor_item01{BackOffice/SearchTerm!!term}] [search:vendor_item02{BackOffice/SearchTerm!!term}limit[1]] [search:vendor_item03{BackOffice/SearchTerm!!term}limit[1]] [search:vendor_item04{BackOffice/SearchTerm!!term}limit[1]] +[limit[1]]"> Vendor</$list><br>
+<$list filter="[tag[Order]!stage[6]] +[search:vendor_item01{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+<$list filter="[tag[Order]!stage[6]] +[search:vendor_item02{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+<$list filter="[tag[Order]!stage[6]] +[search:vendor_item03{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+<$list filter="[tag[Order]!stage[6]] +[search:vendor_item04{BackOffice/SearchTerm!!term}sort[modified]]" template="BackOffice/SearchResults/TemplateB" />
+\end
+
+<div style="width: 100%; margin:auto;">
+<<results>>
+<<results2>>
+<<results3>>
+<<results4>>
+<<results5>>
+
+</div>
+<div style="float:none;clear:both;"/>

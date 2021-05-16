@@ -1,0 +1,29 @@
+created: 20200809145437380
+modified: 20200809145619205
+revision: 0
+subtitle: Add Payment
+tags: FrontDesk
+title: FrontDesk/Order/AddPayment
+type: text/vnd.tiddlywiki
+
+\define showorder()
+Add payment to <<MYORDER>>:
+\end
+
+\define editor()
+Payment Amount: <$edit-text tiddler="FrontDesk/Order/TempPayment" field="amount" /><br>
+
+Payment Type: <$edit-text tiddler=<<MYORDER>> field=<<p_aymentnum>> /><br>
+Check Num: <$edit-text tiddler=<<MYORDER>> field=<<pa_ymentnum>> /><br><br>
+<$button><$action-setfield $tiddler=<<MYORDER>> $field=<<paymentnum>> $value={{{ [[FrontDesk/Order/TempPayment]get[amount]] +[multiply[-1]] }}}/><$action-setfield $tiddler="FrontDesk/Order/TempPayment" $field="amount" $value=""/><$action-sendmessage $message="tm-close-tiddler"/> Save Payment</$button>
+\end
+
+\define payments()
+<$view tiddler=<<MYORDER>> field="payment1"/> <$view tiddler=<<MYORDER>> field="p_ayment1"/> <$view tiddler=<<MYORDER>> field="pa_yment1"/><br>
+<$view tiddler=<<MYORDER>> field="payment2"/> <$view tiddler=<<MYORDER>> field="p_ayment2"/> <$view tiddler=<<MYORDER>> field="pa_yment2"/><br>
+<$view tiddler=<<MYORDER>> field="payment3"/> <$view tiddler=<<MYORDER>> field="p_ayment3"/> <$view tiddler=<<MYORDER>> field="pa_yment3"/>
+\end
+
+<<editor>>
+<br>
+<<payments>>

@@ -1,0 +1,15 @@
+created: 20200809020121053
+modified: 20200814233516765
+revision: 0
+tags: View FrontDesk Home
+title: FrontDesk/Home
+type: text/vnd.tiddlywiki
+
+<div style="text-align: right; margin-bottom: 60px;">
+{{FrontDesk/Menu}}
+</div>
+
+<div>
+{{FrontDesk/SearchBox}}<br>
+{{FrontDesk/SearchResultsToggler}}
+</div>

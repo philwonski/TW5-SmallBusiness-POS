@@ -1,0 +1,40 @@
+created: 20200809020149794
+modified: 20200827123809161
+revision: 0
+tags: FrontDesk
+title: FrontDesk/Menu
+type: text/vnd.tiddlywiki
+
+\define bookButtonClear()
+<$list filter="[[FrontDesk/OrderBook_Holder]has[display]]">
+<$button tooltip="Hide Orders" style="background-color: transparent; border: none; font-size: 150%; cursor: pointer;"><$action-setfield $tiddler="FrontDesk/OrderBook_Holder" $field="display" $value=""/>{{$:/core/images/folder}}</$button></$list>
+\end
+
+\define bookButtonShow()
+<$list filter="[[FrontDesk/OrderBook_Holder]!has[display]]">
+<$button tooltip="Show Orders" style="background-color: transparent; border: none; font-size: 150%; cursor: pointer;"><$action-setfield $tiddler="FrontDesk/OrderBook_Holder" $field="display" $value="""{{FrontDesk/OrderBook}}"""/>{{$:/core/images/folder}}</$button></$list>
+\end
+
+\define clearsearch()
+<$action-setfield $tiddler="FrontDesk/SearchTerm" $field="term" $value=""/>
+\end
+
+\define clerkbutton()
+<$button tooltip="Switch User" style="background-color: transparent; border:none; text-decoration: underline; cursor: pointer; font-size: 110%;"> 
+<$action-sendmessage $message="tm-modal" $param="FrontDesk/ClerkSelect"/>
+{{FrontDesk/StartOrder/storage!!clerkname}}</$button>
+\end
+
+\define settingsbutton()
+<$button tooltip="App Settings" style="background-color: transparent; border: none; font-size: 130%; cursor: pointer;"><$action-sendmessage $message="tm-modal" $param="PLSettings/storage"/>{{$:/core/images/options-button}}</$button>
+\end
+
+\define refreshbutton()
+<$button tooltip="Refresh Data" style="background-color: transparent; border: none; font-size: 130%; cursor: pointer;"><$action-sendmessage $message="tm-browser-refresh"/>
+\end
+
+\define lastorder()
+<$list filter="[tag[Order]!sort[created]limit[1]get[ordernumber]]"><b>{{!!title}}</b></$list>
+\end
+
+<i>Last Order Number Created:</i> <<lastorder>> <<clerkbutton>> <<settingsbutton>> <<refreshpg>> <<bookButtonClear>> <<bookButtonShow>>

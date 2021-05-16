@@ -1,0 +1,15 @@
+created: 20200704153424552
+modified: 20200816221739386
+revision: 0
+tags: BackOffice Button
+title: BackOffice/Button/StartOrder
+type: text/vnd.tiddlywiki
+
+\define actions()
+<$action-setfield $tiddler="BackOffice/Order/SpecialClose" $field="msg" $value="Discard Draft" /><$action-setfield $tiddler="BackOffice/Order/DIALOGUEstore" $field="ab" $value="BackOffice/Order/Dg1a"/>
+<$action-setfield $tiddler="BackOffice/StartOrder/storage" $field="pastevalue" $value={{BackOffice/SearchTerm!!term}} />
+<$action-setfield $tiddler="BackOffice/SearchTerm" $field="term" $value=""/>
+<$action-sendmessage $message="tm-modal" $param="BackOffice/Order/DIALOGUEshell"/>
+\end
+
+<$button class="startOrderButton"><<actions>>Start Order</$button>
