@@ -16330,7 +16330,7 @@ Comment {{$:/core/images/add-comment}}&lt;/$button&gt;
 5: Order Delivered/Installed
 6: Deleted</pre>
 </div>
-<div created="20210518224033800" modified="20210518224047352" stagebars="black" tags="" title="colors" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20210518224033800" modified="20210521185034480" stagebars="grey" tags="" title="colors" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre></pre>
 </div>
 <div company_address="123 Main Street" company_address2="Springfield USA" company_fax="1407734" company_name="Smith's Locksmiths" company_phone="867.5309" created="20210516134934608" modified="20210516135815134" tags="" title="CompanyInfo" type="text/vnd.tiddlywiki" revision="0" bag="default">
@@ -17444,7 +17444,7 @@ Click me!
 <div created="20200704160227192" modified="20210516141034769" tags="PLsettings BackOffice" title="PLSettings" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre></pre>
 </div>
-<div created="20200704160447821" modified="20210516153540156" subtitle="App Settings" tags="BackOffice PLsettings" title="PLSettings/storage" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20200704160447821" modified="20210521184653681" subtitle="App Settings" tags="BackOffice PLsettings" title="PLSettings/storage" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>\define createPerson()
 &lt;$button&gt;&lt;$action-createtiddler $basetitle={{BackOffice/tempPerson!!name}} $template=&quot;Phil&quot; clerkname={{BackOffice/tempPerson!!name}} /&gt;&lt;$action-setfield $tiddler=&quot;BackOffice/tempPerson&quot; $field=&quot;name&quot; $value=&quot;&quot;/&gt;Add Clerk&lt;/$button&gt;
 \end
@@ -17522,7 +17522,16 @@ Integrity Check
 &lt;br&gt;&lt;br&gt;
 &lt;h3&gt;Agreement Message&lt;/h3&gt;
 &lt;hr&gt;
-&lt;$edit-text tiddler=&quot;Both/Settings/storage&quot; field=&quot;text&quot;/&gt;</pre>
+&lt;$edit-text tiddler=&quot;Both/Settings/storage&quot; field=&quot;text&quot;/&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;h3&gt;Stages Bar Color&lt;/h3&gt;
+&lt;hr&gt;
+
+Use [[CSS Colors|https://www.w3schools.com/cssref/css_colors.asp]]
+
+&lt;$edit-text tiddler=&quot;colors&quot; field=&quot;stagebars&quot; /&gt;</pre>
 </div>
 
 
