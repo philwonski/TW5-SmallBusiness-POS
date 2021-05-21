@@ -18,3 +18,9 @@ This is a starter pack for a low-code small business POS (point-of-sale) system.
   * Simply enter some info about the order to begin. 
   * If the customer has never ordered before, simply click the "Start Order" button to begin.
   * If the customer has ordered before, you can click one of their existing orders and, below their contact info, select "New Order with this Account."
+
+
+5. To-Do
+  * Add documentation, especially about how to set up and modify. 
+  * Clean-up code, this was refactored in-place and sometimes fixed in a hurry. Look for Both/Macros tiddler for most of the variable definitions and basic templates to display them. 
+  * Add deployment notes, guides and ideas. For example, there was an interesting challenge that arose during deployment of this, when TW 5.22 broke the original setup by syncing the Storylist and other system tiddlers between screens accessing the app. When combined with the 5.22 bug with multi-line fields, it was unclear what all was going on, so I decided to run this as 2 separate TW instances, back office and front desk, using inotifywait and rsync to sync order data only, and pm2/cron to restart TW every 5 min. This approach worked great on a VPS but was too slow on a Pi, FYI. Hope that saves somebody some time. 
