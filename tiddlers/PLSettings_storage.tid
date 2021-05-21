@@ -1,5 +1,5 @@
 created: 20200704160447821
-modified: 20210516153540156
+modified: 20210521184653681
 subtitle: App Settings
 tags: BackOffice PLsettings
 title: PLSettings/storage
@@ -83,3 +83,12 @@ Integrity Check
 <h3>Agreement Message</h3>
 <hr>
 <$edit-text tiddler="Both/Settings/storage" field="text"/>
+
+<br><br>
+
+<h3>Stages Bar Color</h3>
+<hr>
+
+Use [[CSS Colors|https://www.w3schools.com/cssref/css_colors.asp]]
+
+<$edit-text tiddler="colors" field="stagebars" />
