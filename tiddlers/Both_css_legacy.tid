@@ -1,6 +1,5 @@
 created: 20200802131328998
-modified: 20200809195753022
-revision: 0
+modified: 20210518224205107
 tags: $:/tags/Stylesheet
 title: Both/css/legacy
 type: text/vnd.tiddlywiki
@@ -100,6 +99,7 @@ type: text/vnd.tiddlywiki
 .checkoutbutton {
  background-color: darkgreen;
  color: white;
+ padding: 2.5%;
 }
 
 .checkoutflowb {
@@ -149,7 +149,7 @@ type: text/vnd.tiddlywiki
 .accordian {
 
  border: 0px;
- background-color: grey;
+ background-color: {{colors!!stagebars}};
  width: 100%;
  color: white;
  fill: white;

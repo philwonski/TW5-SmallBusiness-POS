@@ -1,9 +1,8 @@
 clerkname: Phil
 created: 20200809020726848
-modified: 20200926170123029
+modified: 20210518224328884
 pasteto: ordernumber
-pastevalue: 9944055
-revision: 0
+pastevalue: 10002
 tags: FrontDesk
 title: FrontDesk/StartOrder/storage
 type: application/json

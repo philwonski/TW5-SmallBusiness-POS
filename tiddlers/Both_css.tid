@@ -1,5 +1,5 @@
 created: 20200709185436902
-modified: 20210516153834459
+modified: 20210518224244607
 tags: BackOffice FrontDesk $:/tags/Stylesheet
 title: Both/css
 type: text/vnd.tiddlywiki
@@ -49,7 +49,7 @@ height: 0px;
 
 .searchResults { color: blue; background: transparent; border: none; cursor: pointer;}
 
-.startOrderButton { color: white; background: green; border: none; cursor: pointer; padding: 1.5%; margin-top: -5px; margin-left: 50px;}
+.startOrderButton { color: white; background: green; border: none; cursor: pointer; padding: 3.5%; margin-top: -5px; margin-left: 50px;}
 
 .textbutton { background: transparent; border: none; color: blue; cursor: pointer;}
 
